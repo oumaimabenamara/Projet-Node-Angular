@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { pwConfirmationValidator } from '../validators/passwordConfirmationValidator';
+
 
 @Component({
   selector: 'app-my-register',
@@ -15,7 +17,10 @@ export class MyRegisterComponent implements OnInit {
     photo: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(5)]),
-  });
+    passwordConfirmation: new FormControl('', [Validators.required, Validators.minLength(5)])
+  },{
+      validators: [pwConfirmationValidator]
+    });
   constructor() { }
 
   ngOnInit(): void {
