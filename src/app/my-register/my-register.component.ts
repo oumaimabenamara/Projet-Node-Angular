@@ -12,7 +12,7 @@ import { pwConfirmationValidator } from '../validators/passwordConfirmationValid
 })
 export class MyRegisterComponent implements OnInit {
 
-  allExistingUsers: any[];
+
   submitted = false;
   myRegisterForm: FormGroup = new FormGroup({
     companyName: new FormControl('', [Validators.required]),
@@ -34,29 +34,14 @@ export class MyRegisterComponent implements OnInit {
     if (this.myRegisterForm.invalid) {
       return;
     }
-
-    this.loginRegisterService.getAllUsers().subscribe((response: any[]) => {
-      this.allExistingUsers = response;
+    this.loginRegisterService.registerCompany(this.myRegisterForm.value).subscribe((response: any) => {
+      this.myRegisterForm.reset();
+      this.submitted = false;
+      alert('account created');
+      this.route.navigate(['/login'])
     }, error => {
       console.log(error);
+      alert('Email is already in use');
     })
-
-    const found = this.allExistingUsers.find(user => user.email === this.myRegisterForm.value.email)
-
-    if (!found) {
-      this.loginRegisterService.addUser(this.myRegisterForm.value).subscribe((response: any) => {
-        this.myRegisterForm.reset();
-        this.submitted = false;
-        alert('account created');
-        this.route.navigate(['/mylogin'])
-      }, error => {
-        console.log(error);
-      })
-    }
-    else {
-      alert('email already in use');
-    }
-
   }
-
 }

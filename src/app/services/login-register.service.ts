@@ -8,20 +8,20 @@ import { Observable } from 'rxjs';
 export class LoginRegisterService {
 
   constructor(private http: HttpClient) { }
-  
-  addUser(userData: any)
-  {
-    return this.http.post('http://localhost:3000/users', userData);
+
+  registerCompany(companyData: any) {
+    return this.http.post('http://localhost:3000/register', companyData);
   }
 
-  getAllUsers()
-  {
-    return this.http.get('http://localhost:3000/users');
+  loginCompany(companyData: any) {
+    return this.http.post('http://localhost:3000/login', companyData);
   }
 
-  getUserById(id: any)
-  {
-    return this.http.get('http://localhost:3000/users/'+id);
+  forgotPassword(companyData: any) {
+    return this.http.post('http://localhost:3000/forgot-password', companyData);
   }
-  
+  resetPassword(companyData: any) {
+    return this.http.post('http://localhost:3000/reset-password', companyData);
+  }
+
 }

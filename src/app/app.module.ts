@@ -34,7 +34,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyLoginComponent } from './my-login/my-login.component';
 import { MyRegisterComponent } from './my-register/my-register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './providers/token-interceptor.service';
 
 @NgModule({
   imports: [
@@ -69,7 +70,11 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService +,
+    multi: true,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
