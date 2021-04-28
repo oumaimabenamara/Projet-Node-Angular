@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginRegisterService {
-
+  baseUrl = environment.baseUrl
   constructor(private http: HttpClient) { }
-  
-  addUser(userData: any)
-  {
-    return this.http.post('http://localhost:3000/users', userData);
+
+  registerCompany(companyData: any) {
+    return this.http.post(`${this.baseUrl}/register`, companyData);
   }
 
-  getAllUsers()
-  {
-    return this.http.get('http://localhost:3000/users');
+  loginCompany(companyData: any) {
+    return this.http.post(`${this.baseUrl}/login`, companyData);
   }
 
-  getUserById(id: any)
-  {
-    return this.http.get('http://localhost:3000/users/'+id);
+  forgotPassword(companyData: any) {
+    return this.http.post(`${this.baseUrl}/forgot-pasword`, companyData);
   }
-  
+  resetPassword(companyData: any) {
+    return this.http.post(`${this.baseUrl}/reset-password`, companyData);
+  }
+
 }

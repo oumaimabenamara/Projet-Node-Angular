@@ -6,13 +6,12 @@ import { LoginRegisterService } from '../services/login-register.service';
 
 
 @Component({
-  selector: 'app-my-login',
+  selector: 'app-login',
   templateUrl: './my-login.component.html',
   styleUrls: ['./my-login.component.css']
 })
 export class MyLoginComponent implements OnInit {
 
-  allExistingUsers : any[];
   submitted = false;
   myLoginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -23,30 +22,18 @@ export class MyLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit()
-  {
+  submit() {
     this.submitted = true;
-    if(this.myLoginForm.invalid)
-    {
-      return ;
+    if (this.myLoginForm.invalid) {
+      return;
     }
 
-    this.loginRegisterService.getAllUsers().subscribe((response: any[] )=>{
-      this.allExistingUsers = response;
-    }, error=>{
+    this.loginRegisterService.loginCompany(this.myLoginForm.value).subscribe((response: any) => {
+      localStorage.setItem('token', response.token)
+      this.route.navigate(['/dashboard'])
+    }, error => {
+      alert("verify email or password?")
       console.log(error);
     })
-
-    const found = this.allExistingUsers.find(user => user.email === this.myLoginForm.value.email && user.password === this.myLoginForm.value.password)
-    
-    if(found)
-    {
-      this.route.navigate(['/home'])
-    }
-    else{
-      alert("verify email or password?")
-    }
-    
   }
-
 }

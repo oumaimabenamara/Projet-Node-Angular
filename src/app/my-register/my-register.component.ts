@@ -7,61 +7,42 @@ import { pwConfirmationValidator } from '../validators/passwordConfirmationValid
 
 
 @Component({
-  selector: 'app-my-register',
+  selector: 'app-register',
   templateUrl: './my-register.component.html',
   styleUrls: ['./my-register.component.css']
 })
 export class MyRegisterComponent implements OnInit {
 
-  allExistingUsers : any[];
+
   submitted = false;
   myRegisterForm: FormGroup = new FormGroup({
     companyName: new FormControl('', [Validators.required]),
-    companyDescription: new FormControl('', [Validators.required]),
-    photo: new FormControl('', [Validators.required]),
+    // companyDescription: new FormControl('', [Validators.required]),
+    // photo: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(5)]),
     passwordConfirmation: new FormControl('', [Validators.required, Validators.minLength(5)])
-  },{
-      validators: [pwConfirmationValidator]
-    });
-  constructor(private route:Router, private loginRegisterService: LoginRegisterService) { }
+  }, {
+    validators: [pwConfirmationValidator]
+  });
+  constructor(private route: Router, private loginRegisterService: LoginRegisterService) { }
 
   ngOnInit(): void {
   }
 
-  submit()
-  {
+  submit() {
     this.submitted = true;
-    if(this.myRegisterForm.invalid)
-    {
-      return ;
+    if (this.myRegisterForm.invalid) {
+      return;
     }
-
-    this.loginRegisterService.getAllUsers().subscribe((response: any[] )=>{
-      this.allExistingUsers = response;
-    }, error=>{
+    this.loginRegisterService.registerCompany(this.myRegisterForm.value).subscribe((response: any) => {
+      this.myRegisterForm.reset();
+      this.submitted = false;
+      alert('account created');
+      this.route.navigate(['/login'])
+    }, error => {
       console.log(error);
+      alert('Email is already in use');
     })
-    
-    const found = this.allExistingUsers.find(user => user.email === this.myRegisterForm.value.email)
-    
-    if (!found)
-    {
-      this.loginRegisterService.addUser(this.myRegisterForm.value).subscribe((response: any)=>{
-        this.myRegisterForm.reset();
-        this.submitted= false;
-        alert('account created');
-        this.route.navigate(['/mylogin'])
-      }, error=>{
-        console.log(error);
-      })
-    }
-    else 
-    {
-      alert('email already in use');
-    }
-    
   }
-
 }

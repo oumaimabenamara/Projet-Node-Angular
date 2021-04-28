@@ -3,13 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { MyLoginComponent } from './my-login/my-login.component';
 import { MyRegisterComponent } from './my-register/my-register.component';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
+
 
 export const routes: Routes = [
   {
@@ -20,42 +22,31 @@ export const routes: Routes = [
   {
     path: '404',
     component: P404Component,
-    data: {
-      title: 'Page 404'
-    }
   },
   {
     path: '500',
     component: P500Component,
-    data: {
-      title: 'Page 500'
-    }
   },
   {
     path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
-  {
-    path: 'mylogin',
-    component: MyLoginComponent
+    component: MyLoginComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
+    component: MyRegisterComponent,
   },
   {
-    path: 'myregister',
-    component: MyRegisterComponent
+    path: 'forgetpassword',
+    component: ForgetPasswordComponent,
+  },
+  {
+    path: 'resetpassword',
+    component: ResetPasswordComponent,
   },
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
@@ -122,7 +113,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
