@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { pwNewConfirmation } from '../validators/passwordConfirmationValidator';
 
 @Component({
   selector: 'app-reset-password',
@@ -14,6 +15,8 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup = new FormGroup({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(5)]),
     confirmNewPassword: new FormControl('', [Validators.required, Validators.minLength(5)])
+  }, {
+    validators: [pwNewConfirmationValidator]
   });
 
   constructor(private router: Router) { }
@@ -22,23 +25,16 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submit() {
-    const newpass = this.resetPasswordForm.value.newPassword;
-    const newconfirmpass = this.resetPasswordForm.value.confirmNewPassword;
+    // const newpass = this.resetPasswordForm.value.newPassword;
+    // const newconfirmpass = this.resetPasswordForm.value.confirmNewPassword;
     this.submitted = true;
-    if (newpass === newconfirmpass) {
-
-
-      console.log(newpass);
-      console.log(newconfirmpass);
-
-
-      this.router.navigateByUrl('/login');
-
+    if (this.resetPasswordForm.invalid) {
+      return;
     }
-    else {
 
-      this.resetPasswordForm.invalid;
-    }
+    this.router.navigateByUrl('/login');
+
+
 
     // appel service company
   }
