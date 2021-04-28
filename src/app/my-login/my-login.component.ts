@@ -10,7 +10,7 @@ import { LoginRegisterService } from '../services/login-register.service';
 })
 export class MyLoginComponent implements OnInit {
 
-  users: any;
+  allExistingUsers : any[];
   submitted = false;
   myLoginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -19,7 +19,6 @@ export class MyLoginComponent implements OnInit {
   constructor(private route: Router, private loginRegisterService: LoginRegisterService) { }
 
   ngOnInit(): void {
-    this.users=this.loginRegisterService.getAllUsers();
   }
 
   submit()
@@ -30,11 +29,17 @@ export class MyLoginComponent implements OnInit {
       return ;
     }
 
-    let found = this.users.find(x=> x.email === this.myLoginForm.value.email && x.password === this.myLoginForm.value.password);
+    this.loginRegisterService.getAllUsers().subscribe((response: any[] )=>{
+      this.allExistingUsers = response;
+    }, error=>{
+      console.log(error);
+    })
+
+    const found = this.allExistingUsers.find(user => user.email === this.myLoginForm.value.email && user.password === this.myLoginForm.value.password)
     
-    if(found !== undefined)
+    if(found)
     {
-      this.route.navigateByUrl('/home');
+      this.route.navigate(['/home'])
     }
     else{
       alert("verify email or password?")
