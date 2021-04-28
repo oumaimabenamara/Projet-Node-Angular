@@ -34,6 +34,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyLoginComponent } from './my-login/my-login.component';
 import { MyRegisterComponent } from './my-register/my-register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { MyRegisterComponent } from './my-register/my-register.component';
     TabsModule.forRoot(),
     ChartsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,

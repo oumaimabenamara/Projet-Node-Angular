@@ -12,55 +12,51 @@ import { pwConfirmationValidator } from '../validators/passwordConfirmationValid
 })
 export class MyRegisterComponent implements OnInit {
 
-  allExistingUsers : any[];
+  allExistingUsers: any[];
   submitted = false;
   myRegisterForm: FormGroup = new FormGroup({
     companyName: new FormControl('', [Validators.required]),
-    companyDescription: new FormControl('', [Validators.required]),
-    photo: new FormControl('', [Validators.required]),
+    // companyDescription: new FormControl('', [Validators.required]),
+    // photo: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(5)]),
     passwordConfirmation: new FormControl('', [Validators.required, Validators.minLength(5)])
-  },{
-      validators: [pwConfirmationValidator]
-    });
-  constructor(private route:Router, private loginRegisterService: LoginRegisterService) { }
+  }, {
+    validators: [pwConfirmationValidator]
+  });
+  constructor(private route: Router, private loginRegisterService: LoginRegisterService) { }
 
   ngOnInit(): void {
   }
 
-  submit()
-  {
+  submit() {
     this.submitted = true;
-    if(this.myRegisterForm.invalid)
-    {
-      return ;
+    if (this.myRegisterForm.invalid) {
+      return;
     }
 
-    this.loginRegisterService.getAllUsers().subscribe((response: any[] )=>{
+    this.loginRegisterService.getAllUsers().subscribe((response: any[]) => {
       this.allExistingUsers = response;
-    }, error=>{
+    }, error => {
       console.log(error);
     })
-    
+
     const found = this.allExistingUsers.find(user => user.email === this.myRegisterForm.value.email)
-    
-    if (!found)
-    {
-      this.loginRegisterService.addUser(this.myRegisterForm.value).subscribe((response: any)=>{
+
+    if (!found) {
+      this.loginRegisterService.addUser(this.myRegisterForm.value).subscribe((response: any) => {
         this.myRegisterForm.reset();
-        this.submitted= false;
+        this.submitted = false;
         alert('account created');
         this.route.navigate(['/mylogin'])
-      }, error=>{
+      }, error => {
         console.log(error);
       })
     }
-    else 
-    {
+    else {
       alert('email already in use');
     }
-    
+
   }
 
 }
