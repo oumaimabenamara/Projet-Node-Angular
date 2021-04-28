@@ -1,0 +1,112 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="card mx-4">
+              <div class="card-body p-4">
+
+
+                <form [formGroup]="myRegisterForm" (ngSubmit)="submit()">
+                  <h1>Register</h1>
+                  <p class="text-muted">Create your account</p>
+
+
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="company name" formControlName="companyName" [ngClass]="{'is-invalid': submitted && myRegisterForm.controls.companyName.errors, 'is-valid': submitted && !myRegisterForm.controls.companyName.errors}">
+                    </div>
+                    <div class="invalid-feedback d-block">
+                        <div *ngIf="submitted && myRegisterForm.controls.companyName.hasError('required')">company name required</div>
+                    </div>
+                    </div>
+
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <textarea class="form-control" placeholder="company description" formControlName="companyDescription" [ngClass]="{'is-invalid': submitted && myRegisterForm.controls.companyDescription.errors, 'is-valid': submitted && !myRegisterForm.controls.companyDescription.errors}"></textarea>
+                    </div>
+                    <div class="invalid-feedback d-block">
+                        <div *ngIf="submitted && myRegisterForm.controls.companyDescription.hasError('required')">company description required</div>
+                    </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-user"></i></span>
+                          </div>
+                          <input type="file" class="form-control" formControlName="photo" [ngClass]="{'is-invalid': submitted && myRegisterForm.controls.photo.errors, 'is-valid': submitted && !myRegisterForm.controls.photo.errors}">
+                        </div>
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && myRegisterForm.controls.photo.hasError('required')">photo required</div>
+                        </div>
+                        </div>
+
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">@</span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="email" formControlName="email" [ngClass]="{'is-invalid': submitted && myRegisterForm.controls.email.errors, 'is-valid': submitted && !myRegisterForm.controls.email.errors}">
+                    <div class="invalid-feedback d-block">
+                      <div *ngIf="submitted && myRegisterForm.controls.email.hasError('required')">email required</div>
+                      <div *ngIf="submitted && myRegisterForm.controls.email.hasError('email')">email invalid</div>
+                  </div>
+                  </div>
+
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password" [ngClass]="{'is-invalid': submitted && myRegisterForm.controls.password.errors, 'is-valid': submitted && !myRegisterForm.controls.password.errors}">
+                    <div class="invalid-feedback d-block">
+                      <div *ngIf="submitted && myRegisterForm.controls.password.hasError('required')">password required</div>
+                      <div *ngIf="submitted && myRegisterForm.controls.password.hasError('minlength')">password invalid >5</div>
+                  </div>
+                  </div>
+
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password Confirmation" formControlName="passwordConfirmation" [ngClass]="{'is-invalid': submitted && myRegisterForm.controls.passwordConfirmation.errors, 'is-valid': submitted && !myRegisterForm.controls.passwordConfirmation.errors}">
+                    <div class="invalid-feedback d-block">
+                      <div *ngIf="submitted && myRegisterForm.controls.passwordConfirmation.hasError('required')">password confirmation required</div>
+                      <div *ngIf="submitted && myRegisterForm.controls.passwordConfirmation.hasError('minlength')">password confirmation invalid >5</div>
+                      <div *ngIf = "submitted && myRegisterForm.hasError('pwConfirmation')">password does not match</div>
+                  </div>
+                  </div>
+
+
+                  <button type="submit" class="btn btn-block btn-success">Create Account</button>
+                </form>
+
+
+
+              </div>
+              <div class="card-footer p-4">
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
+                  </div>
+                  <div class="col-6">
+                    <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
