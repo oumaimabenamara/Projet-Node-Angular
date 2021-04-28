@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { pwNewConfirmation } from '../validators/passwordConfirmationValidator';
+import { pwNewConfirmationValidator } from '../validators/passwordConfirmationValidator';
 
 @Component({
   selector: 'app-reset-password',
@@ -25,8 +25,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submit() {
-    // const newpass = this.resetPasswordForm.value.newPassword;
-    // const newconfirmpass = this.resetPasswordForm.value.confirmNewPassword;
     this.submitted = true;
     if (this.resetPasswordForm.invalid) {
       return;
