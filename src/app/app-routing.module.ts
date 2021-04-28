@@ -52,6 +52,18 @@ export const routes: Routes = [
     },
     children: [
       {
+        path: 'tags',
+        loadChildren: () => import('./views/tags/tags.module').then(m => m.TagsModule)
+      },
+      {
+        path: 'companies',
+        loadChildren: () => import('./views/companies/companies.module').then(m => m.CompaniesModule)
+      },
+      {
+        path: 'events',
+        loadChildren: () => import('./views/events/events.module').then(m => m.EventsModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },
@@ -109,6 +121,7 @@ export const routes: Routes = [
       }
     ]
   },
+
   { path: '**', component: P404Component }
 ];
 
