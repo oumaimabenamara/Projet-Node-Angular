@@ -6,7 +6,7 @@ import { pwConfirmationValidator } from '../validators/passwordConfirmationValid
 
 
 @Component({
-  selector: 'app-my-register',
+  selector: 'app-register',
   templateUrl: './my-register.component.html',
   styleUrls: ['./my-register.component.css']
 })

@@ -22,58 +22,26 @@ export const routes: Routes = [
   {
     path: '404',
     component: P404Component,
-    data: {
-      title: 'Page 404'
-    }
   },
   {
     path: '500',
     component: P500Component,
-    data: {
-      title: 'Page 500'
-    }
   },
   {
     path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
-  {
-    path: 'mylogin',
     component: MyLoginComponent,
-    data: {
-      title: 'Login Page'
-    }
   },
   {
     path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
+    component: MyRegisterComponent,
   },
   {
     path: 'forgetpassword',
     component: ForgetPasswordComponent,
-    data: {
-      title: 'Forget Page'
-    }
   },
   {
     path: 'resetpassword',
     component: ResetPasswordComponent,
-    data: {
-      title: 'Reset Page'
-    },
-
-  }, {
-    path: 'myregister',
-    component: MyRegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
   },
   {
     path: '',
