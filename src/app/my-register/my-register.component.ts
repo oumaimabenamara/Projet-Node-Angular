@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from '../services/login-register.service';
 import { pwConfirmationValidator } from '../validators/passwordConfirmationValidator';

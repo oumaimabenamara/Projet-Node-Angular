@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from '../services/login-register.service';
+
 
 @Component({
   selector: 'app-my-login',

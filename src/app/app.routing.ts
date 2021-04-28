@@ -40,10 +40,7 @@ export const routes: Routes = [
   },
   {
     path: 'mylogin',
-    component: MyLoginComponent,
-    data: {
-      title: 'Login Page'
-    }
+    component: MyLoginComponent
   },
   {
     path: 'register',
@@ -54,10 +51,7 @@ export const routes: Routes = [
   },
   {
     path: 'myregister',
-    component: MyRegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
+    component: MyRegisterComponent
   },
   {
     path: '',
