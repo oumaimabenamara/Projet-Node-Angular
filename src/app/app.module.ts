@@ -36,6 +36,9 @@ import { MyLoginComponent } from './my-login/my-login.component';
 import { MyRegisterComponent } from './my-register/my-register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
+import { TagAddComponent } from './tag-add/tag-add.component';
+import { TagEditComponent } from './tag-edit/tag-edit.component';
+import { TagListComponent } from './tag-list/tag-list.component';
 
 @NgModule({
   imports: [
@@ -65,7 +68,10 @@ import { TokenInterceptorService } from './providers/token-interceptor.service';
     ForgetPasswordComponent,
     ResetPasswordComponent,
     MyLoginComponent,
-    MyRegisterComponent
+    MyRegisterComponent,
+    TagAddComponent,
+    TagEditComponent,
+    TagListComponent
   ],
   providers: [{
     provide: LocationStrategy,
