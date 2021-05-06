@@ -21,17 +21,17 @@ export class EventService {
 
   getEventById(id: any)
   {
-    return this.http.get(`${this.baseUrl}/events`+id);
+    return this.http.get(`${this.baseUrl}/events/${id}`);
   }
 
   deleteEventById(id: any)
   {
-    return this.http.delete(`${this.baseUrl}/events`+id);
+    return this.http.delete(`${this.baseUrl}/events/${id}`);
   }
 
   editEventById(id: any, eventDataEdited: any)
   {
-    return this.http.put(`${this.baseUrl}/events`+id, eventDataEdited)
+    return this.http.put(`${this.baseUrl}/events/${id}`, eventDataEdited)
   }
   
 }
