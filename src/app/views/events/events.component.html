@@ -1,1 +1,85 @@
-<p>events works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> Bootstrap Modals
+          </div>
+          <div class="card-body">
+
+            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="primaryModal.show()">List Of Events</button>
+
+          </div>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>
+
+
+
+  <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Event list</h4>
+          <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+
+          <div class="row">
+            <div class="offset-3 col-6">
+                <div class="event-container">
+                    <table style="width:100%" class="table table-striped table-hover">
+                        <tr>
+                            <th>N°</th>
+                            <th>Name</th>
+                            <!-- <th>Photo</th> -->
+                            <!-- <th>Tags</th> -->
+                            <th>Event Type</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Start and End Date</th>
+                            <th>Start and End Time</th>
+                            <th>Number of Tickets</th>
+                            <th>Price</th>
+                            <th>Delete</th>
+                            <th>Edit</th>
+                        </tr>
+                        <tr *ngFor="let item of eventsArray; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.eventName | uppercase}}:</td>
+                            <td>{{item.eventPhoto}}:</td>
+                            <td>{{item.eventTags}}:</td>
+                            <td>{{item.eventType}}</td>
+                            <td>{{item.location}}</td>
+                            <td>{{item.eventDescription | lowercase | slice:0:3}}...</td>
+                            <td>{{item.startDate | date:'d/M/y'}}-{{item.endDate | date:'d/M/y'}}</td>
+                            <td>{{item.startTime | date:'shortTime'}}-{{item.endTime | date:'shortTime'}}</td>
+                            <td>{{item.numberOfTickets}}</td>
+                            <td>{{item.price}}</td>
+                            <td><button class="btn btn-danger" (click)="deleteEventFunction(item.id)">delete <i class="fas fa-trash-alt"></i></button></td>
+                            <td><button class="btn btn-dark" [routerLink]="[ '/edit-event', item.id ]">edit <i class="fas fa-edit"></i></button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+

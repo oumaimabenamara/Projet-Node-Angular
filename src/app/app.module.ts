@@ -42,6 +42,9 @@ import { TagListComponent } from './tag-list/tag-list.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventAddComponent } from './event-add/event-add.component';
+// import { EventListComponent } from './event-list/event-list.component';
+// import { EventEditComponent } from './event-edit/event-edit.component';
+// import { EventAddComponent } from './event-add/event-add.component';
 
 @NgModule({
   imports: [
@@ -77,7 +80,11 @@ import { EventAddComponent } from './event-add/event-add.component';
     TagListComponent,
     EventListComponent,
     EventEditComponent,
-    EventAddComponent
+    EventAddComponent,
+
+    // EventListComponent,
+    // EventEditComponent,
+    // EventAddComponent
   ],
   providers: [{
     provide: LocationStrategy,
