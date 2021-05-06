@@ -140,15 +140,22 @@
                         </div>
                     </div> 
 
-                    <div class="form-group">
-                        <label for="eventType">Event Type :</label>
-                        <input type="text" class="form-control" id="eventType" placeholder="Type your event type here" 
-                        formControlName="eventType"
-                        [ngClass]="{'is-invalid': submitted && addEventForm.controls.eventType.errors, 'is-valid': submitted && !addEventForm.controls.eventType.errors}">
-                        <div class="invalid-feedback d-block">
-                            <div *ngIf="submitted && addEventForm.controls.eventType.hasError('required')">Event type is required.</div>
-                        </div>
-                    </div> 
+                    <!-- <div class="form-group form-check">
+                      <span>Event Type :</span>
+                      <input type="radio" id="free" name="eventType" value="free" class="form-control" id="eventType"  
+                      formControlName="free"
+                      [ngClass]="{'is-invalid': submitted && addEventForm.controls.free.errors, 'is-valid': submitted && !addEventForm.controls.free.errors}">
+                      <label for="free">free</label><br>
+
+                      <input type="radio" id="paid" name="eventType" value="paid" class="form-control" id="eventType" 
+                      formControlName="paid"
+                      [ngClass]="{'is-invalid': submitted && addEventForm.controls.paid.errors, 'is-valid': submitted && !addEventForm.controls.paid.errors}">
+                      <label for="paid">paid</label><br>
+
+                      <div class="invalid-feedback d-block">
+                        <div *ngIf="submitted && addEventForm.controls.free.hasError('required') && addEventForm.controls.paid.hasError('required')">Event type is required.</div>
+                    </div>
+                    </div>  -->
 
                     <div class="form-group">
                         <label for="price">Price :</label>

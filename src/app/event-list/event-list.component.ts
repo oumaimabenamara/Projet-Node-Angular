@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { EventService } from '../services/event.service';
 
 @Component({
@@ -7,6 +8,7 @@ import { EventService } from '../services/event.service';
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
+  // @ViewChild('primaryModal') public primaryModal: ModalDirective;
 
   eventsArray: any[];
   constructor(private eventService: EventService) { }

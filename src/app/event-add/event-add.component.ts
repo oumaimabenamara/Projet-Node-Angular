@@ -8,8 +8,8 @@ import { EventService } from '../services/event.service';
   templateUrl: './event-add.component.html',
   styleUrls: [
   './event-add.component.css',
-  '../../../../scss/vendors/bs-datepicker/bs-datepicker.scss',
-  '../../../../scss/vendors/ng-select/ng-select.scss'],
+  '../../scss/vendors/bs-datepicker/bs-datepicker.scss',
+  '../../scss/vendors/ng-select/ng-select.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class EventAddComponent implements OnInit {
@@ -48,7 +48,7 @@ export class EventAddComponent implements OnInit {
     endTime: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
     numberOfTickets: new FormControl('', [Validators.required]),
-    eventType: new FormControl('', [Validators.required]),
+    // eventType: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required]),
   });
 
