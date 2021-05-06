@@ -39,6 +39,9 @@ import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { TagAddComponent } from './tag-add/tag-add.component';
 import { TagEditComponent } from './tag-edit/tag-edit.component';
 import { TagListComponent } from './tag-list/tag-list.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { EventEditComponent } from './event-edit/event-edit.component';
+import { EventAddComponent } from './event-add/event-add.component';
 
 @NgModule({
   imports: [
@@ -71,7 +74,10 @@ import { TagListComponent } from './tag-list/tag-list.component';
     MyRegisterComponent,
     TagAddComponent,
     TagEditComponent,
-    TagListComponent
+    TagListComponent,
+    EventListComponent,
+    EventEditComponent,
+    EventAddComponent
   ],
   providers: [{
     provide: LocationStrategy,

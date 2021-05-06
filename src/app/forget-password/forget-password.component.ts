@@ -46,6 +46,21 @@ export class ForgetPasswordComponent implements OnInit {
     else {
       alert('email does not exist');
     }
+    // this.loginRegisterService.getAllUsers().subscribe((response: any[]) => {
+    //   this.allExistingUsers = response;
+    // }, error => {
+    //   console.log(error);
+    // })
+
+    //   const found = this.allExistingUsers.find(user => user.email === this.forgetPasswordForm.value.email)
+    //   if (found) {
+    //     this.router.navigateByUrl('/resetpassword');
+
+    //   }
+
+    //   else {
+    //     alert('email does not exist')
+    //   }
   }
 
 }
