@@ -20,13 +20,13 @@ export class TagService {
   }
 
   getTagById(id: any) {
-    return this.http.get(`${this.baseUrl}/tags/ ${id}`);
+    return this.http.get(`${this.baseUrl}/tags/${id}`);
   }
 
   deleteTagById(id: any) {
-    return this.http.delete(`${this.baseUrl}/tags/ ${id}`);
+    return this.http.delete(`${this.baseUrl}/tags/${id}`);
   }
-  editTagById(id: any, tagDataEdited: any) {
-    return this.http.put<any>(`${this.baseUrl}/tags/ ${id}`, tagDataEdited)
+  editTagById(id: number, tagDataEdited: any) {
+    return this.http.put(`${this.baseUrl}/tags/${id}`, tagDataEdited)
   }
 }
