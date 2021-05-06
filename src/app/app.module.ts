@@ -36,9 +36,9 @@ import { MyLoginComponent } from './my-login/my-login.component';
 import { MyRegisterComponent } from './my-register/my-register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
-import { EventListComponent } from './event-list/event-list.component';
-import { EventEditComponent } from './event-edit/event-edit.component';
-import { EventAddComponent } from './event-add/event-add.component';
+// import { EventListComponent } from './event-list/event-list.component';
+// import { EventEditComponent } from './event-edit/event-edit.component';
+// import { EventAddComponent } from './event-add/event-add.component';
 
 @NgModule({
   imports: [
@@ -68,10 +68,10 @@ import { EventAddComponent } from './event-add/event-add.component';
     ForgetPasswordComponent,
     ResetPasswordComponent,
     MyLoginComponent,
-    MyRegisterComponent,
-    EventListComponent,
-    EventEditComponent,
-    EventAddComponent
+    MyRegisterComponent
+    // EventListComponent,
+    // EventEditComponent,
+    // EventAddComponent
   ],
   providers: [{
     provide: LocationStrategy,
