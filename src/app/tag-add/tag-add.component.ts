@@ -16,25 +16,12 @@ export class TagAddComponent implements OnInit {
     tagName: new FormControl('', [Validators.required]),
     tagDescription: new FormControl('', [Validators.required]),
   });
-  constructor(private router: Router, private tagService: TagService) { }
+  constructor() { }
 
   ngOnInit(): void {
 
   }
 
-  addTagFunction() {
-    this.submitted = true;
-    if (this.addTagForm.invalid) {
-      return;
-    }
-    this.tagService.addTag(this.addTagForm.value).subscribe(response => {
-      // console.log(response);
-      this.addTagForm.reset();
-      this.submitted = false;
 
-    }, error => {
-      console.log(error);
-    })
-  }
 
 }
