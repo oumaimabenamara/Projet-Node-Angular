@@ -5,6 +5,7 @@ import { ToasterService } from 'angular2-toaster';
 import { ThemeService } from 'ng2-charts';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { CompanyService } from '../../services/company.service';
+import { SweetalertService } from '../../services/sweetalert.service';
 
 @Component({
   selector: 'app-companies',
@@ -29,7 +30,7 @@ export class CompaniesComponent implements OnInit {
     role: new FormControl ('admin', [Validators.required]),
   });
 
-  constructor(private companyService: CompanyService, private toasterService: ToasterService) { }
+  constructor(private companyService: CompanyService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
 
   ngOnInit(): void {
     this.listOfCompanies();
@@ -74,17 +75,22 @@ export class CompaniesComponent implements OnInit {
     this.hideModal();
   }
 
+  deleteCompany(id: any) {
+    this.sweetalert.confirmDialogue('company').then((result) => {
+      if (result.value) {
+        this.companyService.deleteCompanyById(id).subscribe((response: any) => {
+          this.ngOnInit();
+        }, error => {
+          console.log(error);
+        })
+      }
+    })
+  }
+
   editCompany(id: any)
   {
-    this.companyService.getCompanyById(id).subscribe(response=>{
+    this.companyService.getCompanyById(id).subscribe((response: any)=>{
       this.companyForm.patchValue(response);
-      // this.companyForm.patchValue({
-      //   companyName: response._body.companyName,
-      //   companyDescription: response._body.companyDescription,
-      //   photo: response._body.photo,
-      //   email: response._body.email,
-      //   role: response._body.role,
-      // });
       this.showModal();
     }, error=>{
       console.log(error);

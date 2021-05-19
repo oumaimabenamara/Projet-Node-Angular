@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { EventService } from '../../services/event.service';
+import { SweetalertService } from '../../services/sweetalert.service';
 
 @Component({
   selector: 'app-events',
@@ -62,7 +63,7 @@ export class EventsComponent implements OnInit {
     price: new FormControl('', [Validators.required]),
   });
 
-  constructor(private eventService : EventService, private toasterService: ToasterService) { }
+  constructor(private eventService : EventService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
 
   @ViewChild('modal') modal: ModalDirective;
 
@@ -109,6 +110,18 @@ export class EventsComponent implements OnInit {
     })
 
     this.hideModal();
+  }
+
+  deleteCompany(id: any) {
+    this.sweetalert.confirmDialogue('event').then((result) => {
+      if (result.value) {
+        this.eventService.deleteEventById(id).subscribe((response: any) => {
+          this.ngOnInit();
+        }, error => {
+          console.log(error);
+        })
+      }
+    })
   }
 
   editEvent(id: any)
