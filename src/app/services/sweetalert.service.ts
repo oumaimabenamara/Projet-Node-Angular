@@ -11,7 +11,7 @@ export class SweetalertService {
   confirmDialogue(name: string) {
     return Swal.fire({
       title: 'Are you sure?',
-      text: `You will not be able to recover this imaginary ${name}`,
+      text: `You will not be able to recover this ${name}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
