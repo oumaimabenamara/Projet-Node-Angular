@@ -78,6 +78,13 @@ export class CompaniesComponent implements OnInit {
   {
     this.companyService.getCompanyById(id).subscribe(response=>{
       this.companyForm.patchValue(response);
+      // this.companyForm.patchValue({
+      //   companyName: response._body.companyName,
+      //   companyDescription: response._body.companyDescription,
+      //   photo: response._body.photo,
+      //   email: response._body.email,
+      //   role: response._body.role,
+      // });
       this.showModal();
     }, error=>{
       console.log(error);

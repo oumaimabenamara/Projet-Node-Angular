@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 // import { AdvancedFormsComponent } from '../forms/advanced-forms/advanced-forms.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { ToasterModule } from 'angular2-toaster';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     // AdvancedFormsComponent,
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ToasterModule
   ]
 })
 export class EventsModule { }
