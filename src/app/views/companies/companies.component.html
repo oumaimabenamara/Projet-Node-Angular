@@ -1,1 +1,132 @@
-<p>companies works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>List Of Companies
+                </div>
+                <div class="card-body">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-secondary mr-1" data-toggle="modal" (click)="showModal()">Add
+                        Company</button>
+
+                    <table class="table table-striped">
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Company Description</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr *ngFor="let item of listCompanies; let i=index">
+                                <td>{{item.companyName}}</td>
+                                <td>{{item.companyDescription}}</td>
+                                <td>{{item.role}}</td>
+                                <td>{{item.email}}</td>
+                                <td>
+                                    <button class="btn btn-danger" (click)="deleteCompany(item._id)"><i class="fas fa-trash-alt"></i></button>
+                                    <br>
+                                    <button class="btn btn-dark" (click)="editCompany(item._id)"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>
+
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Company</h4>
+                <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- <p>One fine body&hellip;</p> -->
+
+                <form [formGroup]="companyForm" (ngSubmit)="addCompany()">
+                    <div class="form-group">
+                        <label for="name">Company Name :</label>
+                        <input type="text" class="form-control" id="name" placeholder="Company name"
+                            formControlName="companyName"
+                            [ngClass]="{'is-invalid': submitted && companyForm.controls.companyName.errors, 'is-valid': submitted && !companyForm.controls.companyName.errors}">
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && companyForm.controls.companyName.hasError('required')">Company
+                                name is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Company Description :</label>
+                        <input type="text" class="form-control" id="name" placeholder="Company description"
+                            formControlName="companyDescription"
+                            [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}">
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">
+                                Company description is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyRole">Compnay Role :</label>
+
+                        <select name="companyRole" id="companyRole" formControlName="role" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && companyForm.controls.role.errors, 'is-valid': submitted && !companyForm.controls.role.errors}">
+                            <option value="admin">Admin</option>
+                            <option value="superAdmin">Super Admin</option>
+                        </select>
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && companyForm.controls.role.hasError('required')">
+                                Role is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" formControlName="email"
+                                [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
+                        </div>
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && companyForm.controls.email.hasError('required')">email required
+                            </div>
+                            <div *ngIf="submitted && companyForm.controls.email.hasError('email')">email invalid</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Password"
+                                formControlName="password"
+                                [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
+                        </div>
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && companyForm.controls.password.hasError('required')">password
+                                required</div>
+                            <div *ngIf="submitted && companyForm.controls.password.hasError('minlength')">password
+                                invalid >5</div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

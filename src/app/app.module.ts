@@ -36,10 +36,7 @@ import { MyLoginComponent } from './my-login/my-login.component';
 import { MyRegisterComponent } from './my-register/my-register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
-import { TagAddComponent } from './tag-add/tag-add.component';
-import { TagEditComponent } from './tag-edit/tag-edit.component';
-import { TagListComponent } from './tag-list/tag-list.component';
-
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 // import { EventListComponent } from './event-list/event-list.component';
 // import { EventEditComponent } from './event-edit/event-edit.component';
 // import { EventAddComponent } from './event-add/event-add.component';
@@ -60,7 +57,8 @@ import { TagListComponent } from './tag-list/tag-list.component';
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToasterModule
   ],
   declarations: [
     AppComponent,
@@ -73,10 +71,9 @@ import { TagListComponent } from './tag-list/tag-list.component';
     ResetPasswordComponent,
     MyLoginComponent,
     MyRegisterComponent,
-    TagAddComponent,
-    TagEditComponent,
-    TagListComponent,
-
+    // TagAddComponent,
+    // TagEditComponent,
+    // TagListComponent,
 
     // EventListComponent,
     // EventEditComponent,
@@ -89,7 +86,9 @@ import { TagListComponent } from './tag-list/tag-list.component';
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true,
-  },],
+  },
+  ToasterService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
