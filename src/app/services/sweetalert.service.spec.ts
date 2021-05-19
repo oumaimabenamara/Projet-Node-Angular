@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoginRegisterService } from './login-register.service';
+import { SweetalertService } from './sweetalert.service';
 
-describe('LoginRegisterService', () => {
-  let service: LoginRegisterService;
+describe('SweetalertService', () => {
+  let service: SweetalertService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LoginRegisterService);
+    service = TestBed.inject(SweetalertService);
   });
 
   it('should be created', () => {
