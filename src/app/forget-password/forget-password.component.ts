@@ -10,7 +10,7 @@ import { LoginRegisterService } from '../services/login-register.service';;
 })
 export class ForgetPasswordComponent implements OnInit {
 
-  allExistingUsers: any[];
+  found: any;
   submitted = false;
   forgetPasswordForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email])
@@ -26,21 +26,41 @@ export class ForgetPasswordComponent implements OnInit {
       return;
     }
 
+    this.loginRegisterService.forgotPassword(this.forgetPasswordForm.value.email).subscribe((response: any[]) => {
+      console.log(response)
+      this.found = response;
+    }, error => {
+      console.log(error);
+    })
+
+    //   this.loginRegisterService.getAllUsers().subscribe((response: any[]) => {
+    //     this.allExistingUsers = response;
+    //   }, error => {
+    //     console.log(error);
+    //   })
+    //   const found = this.allExistingUsers.find(user => user.email === this.forgetPasswordForm.value.email)
+
+    if (this.found) {
+      this.router.navigateByUrl('/resetpassword');
+    }
+    else {
+      alert('email does not exist');
+    }
     // this.loginRegisterService.getAllUsers().subscribe((response: any[]) => {
     //   this.allExistingUsers = response;
     // }, error => {
     //   console.log(error);
     // })
 
-  //   const found = this.allExistingUsers.find(user => user.email === this.forgetPasswordForm.value.email)
-  //   if (found) {
-  //     this.router.navigateByUrl('/resetpassword');
+    //   const found = this.allExistingUsers.find(user => user.email === this.forgetPasswordForm.value.email)
+    //   if (found) {
+    //     this.router.navigateByUrl('/resetpassword');
 
-  //   }
+    //   }
 
-  //   else {
-  //     alert('email does not exist')
-  //   }
+    //   else {
+    //     alert('email does not exist')
+    //   }
   }
 
 }

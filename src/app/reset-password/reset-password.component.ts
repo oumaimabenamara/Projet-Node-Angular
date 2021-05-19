@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginRegisterService } from '../services/login-register.service';
 import { pwNewConfirmationValidator } from '../validators/passwordConfirmationValidator';
 
 @Component({
@@ -10,7 +11,7 @@ import { pwNewConfirmationValidator } from '../validators/passwordConfirmationVa
 })
 export class ResetPasswordComponent implements OnInit {
 
-
+  companyId: any;
   submitted = false;
   resetPasswordForm: FormGroup = new FormGroup({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -19,9 +20,10 @@ export class ResetPasswordComponent implements OnInit {
     validators: [pwNewConfirmationValidator]
   });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loginRegisterService: LoginRegisterService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.companyId = this.activatedRoute.snapshot.params['found'];
   }
 
   submit() {
@@ -30,11 +32,12 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
 
+    this.loginRegisterService.resetPassword(this.resetPasswordForm.value.newPassword).subscribe((response: any[]) => {
+      console.log(response)
+    }, error => {
+      console.log(error);
+    })
     this.router.navigateByUrl('/login');
-
-
-
-    // appel service company
   }
 
 

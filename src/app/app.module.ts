@@ -70,7 +70,11 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     ForgetPasswordComponent,
     ResetPasswordComponent,
     MyLoginComponent,
-    MyRegisterComponent
+    MyRegisterComponent,
+    // TagAddComponent,
+    // TagEditComponent,
+    // TagListComponent,
+
     // EventListComponent,
     // EventEditComponent,
     // EventAddComponent
