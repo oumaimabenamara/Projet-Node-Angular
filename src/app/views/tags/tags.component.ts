@@ -36,25 +36,12 @@ export class TagsComponent implements OnInit {
   deleteTag(id) {
     this.sweetalert.confirmDialogue('tag').then((result) => {
       if (result.value) {
-        Swal.fire(
-          'Deleted!',
-          'Your imaginary file has been deleted.',
-          'success'
-        )
-        // For more information about handling dismissals please visit
-        // https://sweetalert2.github.io/#handling-dismissals
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
+        this.tagService.deleteTagById(id).subscribe((response: any) => {
+          this.ngOnInit();
+        }, error => {
+          console.log(error);
+        })
       }
-    })
-    this.tagService.deleteTagById(id).subscribe((response: any) => {
-      this.ngOnInit();
-    }, error => {
-      console.log(error);
     })
 
   };
