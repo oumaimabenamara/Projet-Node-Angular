@@ -36,6 +36,8 @@ export class CompaniesComponent implements OnInit {
 
   constructor(private companyService: CompanyService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
 
+  searchText: any;
+
   ngOnInit(): void {
     this.listOfCompanies();
   }

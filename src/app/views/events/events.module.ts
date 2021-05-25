@@ -10,12 +10,14 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ToasterModule } from 'angular2-toaster';
 import { DataTableModule } from 'angular2-datatable';
+import { SearchPipe } from './search.pipe';
 // import { DataFilterPipe } from '../tables/datatable/datafilterpipe';
 
 
 @NgModule({
   declarations: [
     EventsComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,
