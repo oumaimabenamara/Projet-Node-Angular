@@ -1,18 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Type, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { TagService } from '../../services/tag.service';
 import Swal from 'sweetalert2'
 import { SweetalertService } from '../../services/sweetalert.service';
+import { ToasterService } from 'angular2-toaster';
 
 @Component({
   selector: 'app-tags',
   templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.css']
+  styleUrls: ['./tags.component.css', '../../../scss/vendors/toastr/toastr.scss']
 })
 export class TagsComponent implements OnInit {
   @ViewChild('modal') modal: ModalDirective;
+  showEditButton = false;
+  modalTitle = "add tag";
+  editTagId: any;
   tagId: any;
   tagsArray: any[];
   submitted = false;
@@ -21,7 +25,7 @@ export class TagsComponent implements OnInit {
     tagName: new FormControl('', [Validators.required]),
     tagDescription: new FormControl('', [Validators.required]),
   });
-  constructor(private router: Router, private tagService: TagService, private sweetalert: SweetalertService) { }
+  constructor(private router: Router, private tagService: TagService, private sweetalert: SweetalertService, private toasterService: ToasterService) { this.toasterService = toasterService }
 
   ngOnInit(): void {
     this.tagService.getAllTags().subscribe((response: any[]) => {
@@ -31,8 +35,32 @@ export class TagsComponent implements OnInit {
       console.log(error);
     })
     // this.tagId = this.activatedRoute.snapshot.params['item.id'];
+  }
+
+
+  showModalAdd() {
+    this.modal.show();
+    this.modalTitle = "Add tag"
+    this.showEditButton = false
+  };
+  showModalEdit(id: any) {
+    this.modal.show();
+    this.modalTitle = "Edit tag";
+    this.editTagId = id;
+    this.showEditButton = true
+    this.tagService.getTagById(this.editTagId).subscribe((response: any) => {
+      // console.log(response);
+      this.addTagForm.patchValue(response);
+    }, error => {
+      console.log(error);
+    })
+  };
+  hideModal() {
+    this.modal.hide();
+    this.addTagForm.reset();
 
   }
+
   deleteTag(id) {
     this.sweetalert.confirmDialogue('tag').then((result) => {
       if (result.value) {
@@ -45,12 +73,15 @@ export class TagsComponent implements OnInit {
     })
 
   };
-  editTag(id: any) {
-    this.tagService.editTagById(id, this.addTagForm.value).subscribe((response: any) => {
+
+  editTag() {
+    this.tagService.editTagById(this.editTagId, this.addTagForm.value).subscribe((response: any) => {
       // console.log(response);
-      this.addTagForm.patchValue(response);
       this.ngOnInit()
-      this.modal.show();
+      this.modal.hide();
+      this.addTagForm.reset();
+      // this.modal.show();
+      this.toasterService.pop('success', 'Success', 'Tag edited successfully');
     }, error => {
       console.log(error);
     })
@@ -67,18 +98,14 @@ export class TagsComponent implements OnInit {
       this.submitted = false;
       this.ngOnInit()
       this.modal.hide();
+      this.toasterService.pop('success', 'Success', 'Tag added succusfuly');
+
 
     }, error => {
       console.log(error);
     })
   }
-  showModal() {
-    this.modal.show();
-  };
-  hideModal() {
-    this.modal.hide();
 
-  }
 
 
 }
