@@ -7,6 +7,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { CompanyService } from '../../services/company.service';
 import { SweetalertService } from '../../services/sweetalert.service';
 
+
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',

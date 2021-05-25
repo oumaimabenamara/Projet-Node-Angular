@@ -20,7 +20,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-user"></i></span>
                           </div>
-                          <input type="text" class="form-control" placeholder="Username" formControlName="email" [ngClass]="{'is-invalid': submitted && myLoginForm.controls.email.errors, 'is-valid': submitted && !myLoginForm.controls.email.errors}">
+                          <input type="text" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid': submitted && myLoginForm.controls.email.errors, 'is-valid': submitted && !myLoginForm.controls.email.errors}">
                         </div>
                         <div class="invalid-feedback d-block">
                             <div *ngIf="submitted && myLoginForm.controls.email.hasError('required')">email required</div>

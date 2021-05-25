@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginRegisterService } from '../services/login-register.service';;
+import { LoginRegisterService } from '../services/login-register.service';
+import { ToasterService } from 'angular2-toaster';
 
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.css']
+  styleUrls: ['./forget-password.component.css',
+  '../../scss/vendors/toastr/toastr.scss'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class ForgetPasswordComponent implements OnInit {
 
@@ -15,7 +19,7 @@ export class ForgetPasswordComponent implements OnInit {
   forgetPasswordForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email])
   });
-  constructor(private router: Router, private loginRegisterService: LoginRegisterService) { }
+  constructor(private router: Router, private loginRegisterService: LoginRegisterService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
   }
@@ -44,7 +48,7 @@ export class ForgetPasswordComponent implements OnInit {
       this.router.navigateByUrl('/resetpassword');
     }
     else {
-      alert('email does not exist');
+      this.toasterService.pop('error', 'Error', 'email does not exist');
     }
     // this.loginRegisterService.getAllUsers().subscribe((response: any[]) => {
     //   this.allExistingUsers = response;
