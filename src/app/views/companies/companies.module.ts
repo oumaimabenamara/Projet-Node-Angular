@@ -6,18 +6,21 @@ import { CompaniesComponent } from './companies.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToasterModule } from 'angular2-toaster';
+import { DataTableModule } from 'angular2-datatable';
+// import { DataFilterPipe } from '../tables/datatable/datafilterpipe';
 
 
 @NgModule({
   declarations: [
-    CompaniesComponent
+    CompaniesComponent,
   ],
   imports: [
     CommonModule,
     CompaniesRoutingModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
-    ToasterModule
+    ToasterModule,
+    DataTableModule,
   ]
 })
 export class CompaniesModule { }

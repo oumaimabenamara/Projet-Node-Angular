@@ -37,6 +37,8 @@ import { MyRegisterComponent } from './my-register/my-register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+// import { DataFilterPipe } from './views/tables/datatable/datafilterpipe';
+import { DataTableModule } from 'angular2-datatable';
 // import { EventListComponent } from './event-list/event-list.component';
 // import { EventEditComponent } from './event-edit/event-edit.component';
 // import { EventAddComponent } from './event-add/event-add.component';
@@ -58,7 +60,8 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToasterModule
+    ToasterModule,
+    DataTableModule
   ],
   declarations: [
     AppComponent,

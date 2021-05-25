@@ -9,11 +9,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ToasterModule } from 'angular2-toaster';
+import { DataTableModule } from 'angular2-datatable';
+// import { DataFilterPipe } from '../tables/datatable/datafilterpipe';
 
 
 @NgModule({
   declarations: [
-    EventsComponent
+    EventsComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { ToasterModule } from 'angular2-toaster';
     // AdvancedFormsComponent,
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    ToasterModule
+    ToasterModule,
+    DataTableModule
   ]
 })
 export class EventsModule { }

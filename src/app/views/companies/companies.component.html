@@ -17,25 +17,38 @@
 
 
                     <div class="col-sm-12">
-                        <table class="table table-striped table-hover">
-                            <tr>
-                                <th>Company Name</th>
-                                <th>Company Description</th>
-                                <th>Role</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                            <tr *ngFor="let item of listCompanies; let i=index">
-                                <td>{{item.companyName}}</td>
-                                <td>{{item.companyDescription}}</td>
-                                <td>{{item.role}}</td>
-                                <td>{{item.email}}</td>
-                                <td>
-                                    <button class="btn btn-info text-white" (click)="showModalEdit(item._id)"><i class="fa fa-edit"></i> Edit</button>
-                                    <button class="btn btn-danger my-1" (click)="deleteCompany(item._id)"><i class="fa fa-trash"></i> Delete</button>
-                                    <br>
-                                </td>
-                            </tr>
+                        <table  class="table table-striped table-hover table-responsive-lg" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+                            <thead>
+                                <tr>
+                                    <th><mfDefaultSorter by="companyName">Company Name</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="companyDescription">Company Description</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="role">Role</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="email">Email</mfDefaultSorter></th>
+                                    <th>Actions</th>
+                                </tr>   
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let item of data; let i=index">
+                                    <td>{{item.companyName | uppercase}}</td>
+                                    <td>{{item.companyDescription | lowercase | slice:0:3}}...</td>
+                                    <td>{{item.role}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>
+                                        <button class="btn btn-info text-white" (click)="showModalEdit(item._id)"><i class="fa fa-edit"></i> Edit</button>
+                                        <button class="btn btn-danger my-1" (click)="deleteCompany(item._id)"><i class="fa fa-trash"></i> Delete</button>
+                                        <br>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                  <td colspan="5">
+                                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                                  </td>
+                                </tr>
+                            </tfoot>
                     </table>
                     </div>
                 </div>
@@ -73,8 +86,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Company Description :</label>
-                        <input type="text" class="form-control" id="name" placeholder="Company description"
+                        <label for="description">Company Description :</label>
+                        <input type="text" class="form-control" id="description" placeholder="Company description"
                             formControlName="companyDescription"
                             [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}">
                         <div class="invalid-feedback d-block">
@@ -99,7 +112,7 @@
 
                     <div class="form-group">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Username" formControlName="email"
+                            <input type="text" class="form-control" placeholder="Email" formControlName="email"
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
                         </div>
                         <div class="invalid-feedback d-block">

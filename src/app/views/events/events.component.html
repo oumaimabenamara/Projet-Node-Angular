@@ -16,40 +16,53 @@
                     </div>
 
                     <div class="col-sm-12">
-                        <table class="table table-striped table-hover">
-                            <tr>
-                                <th>N°</th>
-                                <th>Name</th>
-                                <!-- <th>Photo</th> -->
-                                <!-- <th>Tags</th> -->
-                                <th>Event Type</th>
-                                <th>Location</th>
-                                <th>Description</th>
-                                <th>Start and End Date</th>
-                                <th>Start and End Time</th>
-                                <th>Number of Tickets</th>
-                                <th>Price</th>
-                                <th>Actions</th>
-                            </tr>
-                            <tr *ngFor="let item of eventsArray; let i=index">
-                                <td>{{i+1}}</td>
-                                <td>{{item.eventName | uppercase}}:</td>
-                                <!-- <td>{{item.eventPhoto}}:</td>
-                                <td>{{item.eventTags}}:</td> -->
-                                <td>{{item.eventType}}</td>
-                                <td>{{item.location}}</td>
-                                <td>{{item.eventDescription | lowercase | slice:0:3}}...</td>
-                                <td>{{item.startDate | date:'d/M/y'}}-{{item.endDate | date:'d/M/y'}}</td>
-                                <td>{{item.startTime | date:'shortTime'}}-{{item.endTime | date:'shortTime'}}
-                                </td>
-                                <td>{{item.numberOfTickets}}</td>
-                                <td>{{item.price}}</td>
-                                <td>
-                                    <button class="btn btn-dark" (click)="showModalEdit(item._id)"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger" (click)="deleteEvent(item._id)"><i class="fas fa-trash-alt"></i></button>
-                                    <br>
-                                </td>
-                            </tr>
+                        <table class="table table-striped table-hover table-responsive-lg" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+                            <thead>
+                                <tr>
+                                    <!-- <th>N°</th> -->
+                                    <th><mfDefaultSorter by="eventName">Name</mfDefaultSorter></th>
+                                    <!-- <th>Photo</th> -->
+                                    <!-- <th>Tags</th> -->
+                                    <th><mfDefaultSorter by="eventType">Event Type</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="location">Location</mfDefaultSorter></th>
+                                    <!-- <th>Description</th> -->
+                                    <th><mfDefaultSorter by="date">Start and End Date</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="time">Start and End Time</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="numberOfTickets">Number of Tickets</mfDefaultSorter></th>
+                                    <th><mfDefaultSorter by="price">Price</mfDefaultSorter></th>
+                                    <th>Actions</th>
+                                </tr>  
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let item of eventsArray; let i=index">
+                                    <!-- <td>{{i+1}}</td> -->
+                                    <td>{{item.eventName | uppercase}}:</td>
+                                    <!-- <td>{{item.eventPhoto}}:</td>
+                                    <td>{{item.eventTags}}:</td> -->
+                                    <td>{{item.eventType}}</td>
+                                    <td>{{item.location}}</td>
+                                    <!-- <td>{{item.eventDescription | lowercase | slice:0:3}}...</td> -->
+                                    <td>{{item.startDate | date:'d/M/y'}}-{{item.endDate | date:'d/M/y'}}</td>
+                                    <td>{{item.startTime | date:'shortTime'}}-{{item.endTime | date:'shortTime'}}
+                                    </td>
+                                    <td>{{item.numberOfTickets}}</td>
+                                    <td>{{item.price}}</td>
+                                    <td>
+                                        <button class="btn btn-dark" (click)="showModalEdit(item._id)"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-danger" (click)="deleteEvent(item._id)"><i class="fas fa-trash-alt"></i></button>
+                                        <br>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                  <td colspan="5">
+                                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                                  </td>
+                                </tr>
+                            </tfoot>
                     </table>
                     </div>    
                 </div>

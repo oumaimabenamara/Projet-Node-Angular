@@ -23,7 +23,7 @@ export class CompaniesComponent implements OnInit {
   showEditButton = false;
   editCompanyId: any;
   modalTitle = "Add company";
-  listCompanies: any[];
+  data: any[];
   submitted = false;
   companyForm: FormGroup = new FormGroup({
     companyName: new FormControl ('', [Validators.required]),
@@ -43,7 +43,7 @@ export class CompaniesComponent implements OnInit {
   listOfCompanies()
   {
     this.companyService.getAllCompanies().subscribe((response: any[]) =>{
-      this.listCompanies = response;
+      this.data = response;
     }), error => {
       console.log('error');
     }
