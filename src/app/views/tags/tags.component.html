@@ -14,7 +14,7 @@
          
             <div class="row">
               <div class="col-sm-12">
-                <button type="button" class="btn btn-primary float-right mb-2" data-toggle="modal" (click)="showModal()">
+                <button type="button" class="btn btn-primary float-right mb-2" data-toggle="modal" (click)="showModalAdd()">
                   <i class="fa fa-plus"></i>  Add Tag  </button>
               </div>
             </div>
@@ -35,7 +35,7 @@
                             <td>{{item.tagDescription}}:</td>
                             <td>
                              
-                              <button class="btn btn-info text-white" (click)="editTag(item._id)"><i class="fa fa-edit"></i> Edit</button>
+                              <button type="button" class="btn btn-info text-white" (click)="showModalEdit(item._id)"><i class="fa fa-edit"></i> Edit</button>
                               <button class="btn btn-danger" (click)="deleteTag(item._id)"><i class="fa fa-trash"></i> Delete <i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
@@ -58,7 +58,7 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title">Add the tags that match with your events</h4>
+        <h4 class="modal-title">{{modalTitle}}</h4>
         <button type="button" class="close" (click)="hideModal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -86,7 +86,8 @@
           </div> 
  </div>
    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary "><i class="fa fa-save"> Save</i></button>
+        <button type="submit" class="btn btn-primary " *ngIf="!showEditButton" ><i class="fa fa-save"> Save</i></button>
+        <button type="button" class="btn btn-primary " (click)="editTag()" *ngIf="showEditButton"><i class="fa fa-save"> Save changes</i></button>
         <button type="button" class="btn btn-secondary" (click)="hideModal()"><i class="fa fa-arrow-left"> Cancel</i></button>
      </div>
     </form>
