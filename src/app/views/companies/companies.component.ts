@@ -19,6 +19,9 @@ export class CompaniesComponent implements OnInit {
 
   @ViewChild('modal') modal: ModalDirective;
 
+  showEditButton = false;
+  editCompanyId: any;
+  modalTitle = "Add company";
   listCompanies: any[];
   submitted = false;
   companyForm: FormGroup = new FormGroup({
@@ -45,17 +48,33 @@ export class CompaniesComponent implements OnInit {
     }
   }
 
-  showModal()
+  showModalAdd()
   {
+    this.showEditButton = false;
     this.modal.show();
+    this.modalTitle = "Add company";
+  }
+
+  showModalEdit(id: any)
+  {
+    this.showEditButton = true;
+    this.modal.show();
+    this.modalTitle = "Edit company";
+    this.editCompanyId = id;
+    this.companyService.getCompanyById(this.editCompanyId).subscribe((response: any)=>{
+      this.companyForm.patchValue(response);
+    }, error=>{
+      console.log(error);
+    })
   }
 
   hideModal()
   {
     this.modal.hide();
+    this.companyForm.reset();
   }
 
-  addCompany()
+  addCompanyFunction()
   {
     this.submitted = true;
     if(this.companyForm.invalid)
@@ -64,15 +83,14 @@ export class CompaniesComponent implements OnInit {
     }
   
     this.companyService.addCompany(this.companyForm.value).subscribe(response=>{
-      this.companyForm.reset();
       this.submitted = false;
       this.listOfCompanies();
-      this.toasterService.pop('success', 'Success Toaster', 'This is toaster description');
+      // this.companyForm.reset();
+      this.hideModal();
+      this.toasterService.pop('success', 'Success', 'User added successfully');
     }, error=>{
       console.log(error);
     })
-
-    this.hideModal();
   }
 
   deleteCompany(id: any) {
@@ -87,11 +105,13 @@ export class CompaniesComponent implements OnInit {
     })
   }
 
-  editCompany(id: any)
+  editCompany()
   {
-    this.companyService.getCompanyById(id).subscribe((response: any)=>{
-      this.companyForm.patchValue(response);
-      this.showModal();
+    this.companyService.editCompanyById(this.editCompanyId, this.companyForm.value).subscribe((response: any)=>{
+      this.ngOnInit();
+      this.hideModal();
+      // this.companyForm.reset();
+      this.toasterService.pop('success', 'Success', 'User edited successfully');
     }, error=>{
       console.log(error);
     })

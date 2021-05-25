@@ -46,6 +46,9 @@ export class EventsComponent implements OnInit {
 
   // myID: any;
   // showEditButton = false;
+  showEditButton = false;
+  editEventId: any;
+  modalTitle = "Add Event";
   eventsArray: any[];
   submitted = false;
   addEditEventForm: FormGroup = new FormGroup({
@@ -68,7 +71,7 @@ export class EventsComponent implements OnInit {
   @ViewChild('modal') modal: ModalDirective;
 
   ngOnInit(): void {
-    this.  listOfEvents();
+    this.listOfEvents();
   }
 
 
@@ -81,18 +84,34 @@ export class EventsComponent implements OnInit {
     })
   }
 
-  showModal()
+  showModalAdd()
   {
+    this.showEditButton = false;
     this.modal.show();
+    this.modalTitle = "Add event";
+  }
+
+  showModalEdit(id: any)
+  {
+    this.showEditButton = true;
+    this.modal.show();
+    this.modalTitle = "Edit event";
+    this.editEventId = id;
+    this.eventService.getEventById(this.editEventId).subscribe((response: any)=>{
+      this.addEditEventForm.patchValue(response);
+    }, error=>{
+      console.log(error);
+    })
   }
 
   hideModal()
   {
     this.modal.hide();
+    this.addEditEventForm.reset();
   }
 
 
-  addEvent()
+  addEventFunction()
   {
     this.submitted = true;
     if(this.addEditEventForm.invalid)
@@ -101,18 +120,17 @@ export class EventsComponent implements OnInit {
     }
   
     this.eventService.addEvent(this.addEditEventForm.value).subscribe(response=>{
-      this.addEditEventForm.reset();
       this.submitted = false;
       this.listOfEvents();
-      // this.toasterService.pop('success', 'Success Toaster', 'This is toaster description');
+      // this.addEditEventForm.reset();
+      this.hideModal();
+      this.toasterService.pop('success', 'Success', 'Event added successfully');
     }, error=>{
       console.log(error);
     })
-
-    this.hideModal();
   }
 
-  deleteCompany(id: any) {
+  deleteEvent(id: any) {
     this.sweetalert.confirmDialogue('event').then((result) => {
       if (result.value) {
         this.eventService.deleteEventById(id).subscribe((response: any) => {
@@ -124,15 +142,18 @@ export class EventsComponent implements OnInit {
     })
   }
 
-  editEvent(id: any)
+  editEvent()
   {
-    this.eventService.getEventById(id).subscribe(response=>{
-      this.addEditEventForm.patchValue(response);
-      this.showModal();
+    this.eventService.editEventById(this.editEventId, this.addEditEventForm.value).subscribe((response: any)=>{
+      this.ngOnInit();
+      this.hideModal();
+      // this.addEditEventForm.reset();
+      this.toasterService.pop('success', 'Success', 'Event edited successfully');
     }, error=>{
       console.log(error);
     })
   }
+
 
 
   // addEventFunction()
