@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from '../services/login-register.service';
 import { pwConfirmationValidator } from '../validators/passwordConfirmationValidator';
+import { ToasterService } from 'angular2-toaster';
 
 
 @Component({
   selector: 'app-register',
   templateUrl: './my-register.component.html',
-  styleUrls: ['./my-register.component.css']
+  styleUrls: ['./my-register.component.css',
+  '../../scss/vendors/toastr/toastr.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MyRegisterComponent implements OnInit {
 
@@ -25,7 +28,7 @@ export class MyRegisterComponent implements OnInit {
   }, {
     validators: [pwConfirmationValidator]
   });
-  constructor(private route: Router, private loginRegisterService: LoginRegisterService) { }
+  constructor(private route: Router, private loginRegisterService: LoginRegisterService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
   }
@@ -38,11 +41,11 @@ export class MyRegisterComponent implements OnInit {
     this.loginRegisterService.registerCompany(this.myRegisterForm.value).subscribe((response: any) => {
       this.myRegisterForm.reset();
       this.submitted = false;
-      alert('account created');
+      this.toasterService.pop('success', 'Success', 'account created successfully');
       this.route.navigate(['/login'])
     }, error => {
       console.log(error);
-      alert('Email is already in use');
+      this.toasterService.pop('error', 'Error', 'Email is already in use');
     })
   }
 }

@@ -5,6 +5,8 @@ import { ToasterService } from 'angular2-toaster';
 import { ThemeService } from 'ng2-charts';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { CompanyService } from '../../services/company.service';
+import { SweetalertService } from '../../services/sweetalert.service';
+
 
 @Component({
   selector: 'app-companies',
@@ -18,7 +20,11 @@ export class CompaniesComponent implements OnInit {
 
   @ViewChild('modal') modal: ModalDirective;
 
-  listCompanies: any[];
+  showEditButton = false;
+  editCompanyId: any;
+  modalTitle = "Add company";
+  data: any[];
+  searchText: any;
   submitted = false;
   companyForm: FormGroup = new FormGroup({
     companyName: new FormControl ('', [Validators.required]),
@@ -29,7 +35,7 @@ export class CompaniesComponent implements OnInit {
     role: new FormControl ('admin', [Validators.required]),
   });
 
-  constructor(private companyService: CompanyService, private toasterService: ToasterService) { }
+  constructor(private companyService: CompanyService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
 
   ngOnInit(): void {
     this.listOfCompanies();
@@ -38,23 +44,39 @@ export class CompaniesComponent implements OnInit {
   listOfCompanies()
   {
     this.companyService.getAllCompanies().subscribe((response: any[]) =>{
-      this.listCompanies = response;
+      this.data = response;
     }), error => {
       console.log('error');
     }
   }
 
-  showModal()
+  showModalAdd()
   {
+    this.showEditButton = false;
     this.modal.show();
+    this.modalTitle = "Add company";
+  }
+
+  showModalEdit(id: any)
+  {
+    this.showEditButton = true;
+    this.modal.show();
+    this.modalTitle = "Edit company";
+    this.editCompanyId = id;
+    this.companyService.getCompanyById(this.editCompanyId).subscribe((response: any)=>{
+      this.companyForm.patchValue(response);
+    }, error=>{
+      console.log(error);
+    })
   }
 
   hideModal()
   {
     this.modal.hide();
+    this.companyForm.reset();
   }
 
-  addCompany()
+  addCompanyFunction()
   {
     this.submitted = true;
     if(this.companyForm.invalid)
@@ -63,29 +85,35 @@ export class CompaniesComponent implements OnInit {
     }
   
     this.companyService.addCompany(this.companyForm.value).subscribe(response=>{
-      this.companyForm.reset();
       this.submitted = false;
       this.listOfCompanies();
-      this.toasterService.pop('success', 'Success Toaster', 'This is toaster description');
+      // this.companyForm.reset();
+      this.hideModal();
+      this.toasterService.pop('success', 'Success', 'User added successfully');
     }, error=>{
       console.log(error);
     })
-
-    this.hideModal();
   }
 
-  editCompany(id: any)
+  deleteCompany(id: any) {
+    this.sweetalert.confirmDialogue('company').then((result) => {
+      if (result.value) {
+        this.companyService.deleteCompanyById(id).subscribe((response: any) => {
+          this.ngOnInit();
+        }, error => {
+          console.log(error);
+        })
+      }
+    })
+  }
+
+  editCompany()
   {
-    this.companyService.getCompanyById(id).subscribe(response=>{
-      this.companyForm.patchValue(response);
-      // this.companyForm.patchValue({
-      //   companyName: response._body.companyName,
-      //   companyDescription: response._body.companyDescription,
-      //   photo: response._body.photo,
-      //   email: response._body.email,
-      //   role: response._body.role,
-      // });
-      this.showModal();
+    this.companyService.editCompanyById(this.editCompanyId, this.companyForm.value).subscribe((response: any)=>{
+      this.ngOnInit();
+      this.hideModal();
+      // this.companyForm.reset();
+      this.toasterService.pop('success', 'Success', 'User edited successfully');
     }, error=>{
       console.log(error);
     })

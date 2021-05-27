@@ -33,15 +33,26 @@ export const navItems: NavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
+    icon: 'icon-speedometer'
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Menu'
+  },
+  {
+    name: 'Companies',
+    url: '/companies',
+    icon: 'icon-user'
+  },
+  {
+    name: 'Events',
+    url: '/events',
+    icon: 'icon-list'
+  },
+  {
+    name: 'Tags',
+    url: '/tags',
+    icon: 'icon-tag'
   },
   {
     name: 'Colors',
