@@ -39,9 +39,7 @@ import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 // import { DataFilterPipe } from './views/tables/datatable/datafilterpipe';
 import { DataTableModule } from 'angular2-datatable';
-// import { EventListComponent } from './event-list/event-list.component';
-// import { EventEditComponent } from './event-edit/event-edit.component';
-// import { EventAddComponent } from './event-add/event-add.component';
+
 
 @NgModule({
   imports: [
@@ -74,6 +72,7 @@ import { DataTableModule } from 'angular2-datatable';
     ResetPasswordComponent,
     MyLoginComponent,
     MyRegisterComponent,
+
     // TagAddComponent,
     // TagEditComponent,
     // TagListComponent,
@@ -90,8 +89,8 @@ import { DataTableModule } from 'angular2-datatable';
     useClass: TokenInterceptorService,
     multi: true,
   },
-  ToasterService
-],
+    ToasterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -26,7 +26,7 @@ export class TagService {
   deleteTagById(id: any) {
     return this.http.delete(`${this.baseUrl}/tags/${id}`);
   }
-  editTagById(id: number, tagDataEdited: any) {
+  editTagById(id: any, tagDataEdited: any) {
     return this.http.put(`${this.baseUrl}/tags/${id}`, tagDataEdited)
   }
 }
