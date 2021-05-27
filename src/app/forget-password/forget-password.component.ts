@@ -33,6 +33,7 @@ export class ForgetPasswordComponent implements OnInit {
     this.loginRegisterService.forgotPassword(this.forgetPasswordForm.value.email).subscribe((response: any[]) => {
       console.log(response)
       this.found = response;
+      this.toasterService.pop('success', 'Success', 'email sent!');
     }, error => {
       console.log(error);
     })
