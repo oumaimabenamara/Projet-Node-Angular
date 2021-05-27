@@ -49,7 +49,8 @@ export class EventsComponent implements OnInit {
   showEditButton = false;
   editEventId: any;
   modalTitle = "Add Event";
-  eventsArray: any[];
+  data: any[];
+  searchText: any;
   submitted = false;
   addEditEventForm: FormGroup = new FormGroup({
     eventName: new FormControl('', [Validators.required]),
@@ -78,7 +79,7 @@ export class EventsComponent implements OnInit {
   listOfEvents()
   {
     this.eventService.getAllEvents().subscribe((response: any[] )=>{
-      this.eventsArray = response;
+      this.data = response;
     }, error=>{
       console.log(error);
     })

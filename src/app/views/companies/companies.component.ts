@@ -24,6 +24,7 @@ export class CompaniesComponent implements OnInit {
   editCompanyId: any;
   modalTitle = "Add company";
   data: any[];
+  searchText: any;
   submitted = false;
   companyForm: FormGroup = new FormGroup({
     companyName: new FormControl ('', [Validators.required]),
@@ -35,8 +36,6 @@ export class CompaniesComponent implements OnInit {
   });
 
   constructor(private companyService: CompanyService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
-
-  searchText: any;
 
   ngOnInit(): void {
     this.listOfCompanies();

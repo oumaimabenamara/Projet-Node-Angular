@@ -41,7 +41,7 @@
                             </thead>
 
                             <tbody>
-                                <tr *ngFor="let item of data; let i=index">
+                                <tr *ngFor="let item of mf.data; let i=index">
                                     <td>{{item.companyName | uppercase}}</td>
                                     <td>{{item.companyDescription | lowercase | slice:0:3}}...</td>
                                     <td>{{item.role}}</td>
