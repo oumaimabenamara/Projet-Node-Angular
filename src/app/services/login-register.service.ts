@@ -19,7 +19,7 @@ export class LoginRegisterService {
   }
 
   forgotPassword(companyData: any) {
-    return this.http.post(`${this.baseUrl}/forgot-pasword`, companyData);
+    return this.http.get(`${this.baseUrl}/forgot-pasword/${companyData.email}`);
   }
   resetPassword(companyData: any) {
     return this.http.post(`${this.baseUrl}/reset-password`, companyData);
