@@ -1,11 +1,11 @@
 import { Component, OnInit, Type, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { TagService } from '../../services/tag.service';
-import Swal from 'sweetalert2'
 import { SweetalertService } from '../../services/sweetalert.service';
 import { ToasterService } from 'angular2-toaster';
+
 
 @Component({
   selector: 'app-tags',
@@ -14,11 +14,14 @@ import { ToasterService } from 'angular2-toaster';
 })
 export class TagsComponent implements OnInit {
   @ViewChild('modal') modal: ModalDirective;
+  error: any;
+  public data: any;
+  public filterQuery = '';
   showEditButton = false;
   modalTitle = "add tag";
   editTagId: any;
   tagId: any;
-  tagsArray: any[];
+  // data: any[];
   submitted = false;
   addTagForm: FormGroup = new FormGroup({
 
@@ -30,7 +33,7 @@ export class TagsComponent implements OnInit {
   ngOnInit(): void {
     this.tagService.getAllTags().subscribe((response: any[]) => {
 
-      this.tagsArray = response;
+      this.data = response;
     }, error => {
       console.log(error);
     })

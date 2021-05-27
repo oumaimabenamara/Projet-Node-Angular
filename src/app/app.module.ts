@@ -37,6 +37,8 @@ import { MyRegisterComponent } from './my-register/my-register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+
+
 // import { EventListComponent } from './event-list/event-list.component';
 // import { EventEditComponent } from './event-edit/event-edit.component';
 // import { EventAddComponent } from './event-add/event-add.component';
@@ -71,6 +73,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     ResetPasswordComponent,
     MyLoginComponent,
     MyRegisterComponent,
+
     // TagAddComponent,
     // TagEditComponent,
     // TagListComponent,
@@ -87,8 +90,8 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     useClass: TokenInterceptorService,
     multi: true,
   },
-  ToasterService
-],
+    ToasterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
