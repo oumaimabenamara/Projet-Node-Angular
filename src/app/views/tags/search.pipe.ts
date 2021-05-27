@@ -1,10 +1,9 @@
-import * as _ from 'lodash';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'dataFilter'
+  name: 'search'
 })
-export class DataFilterPipe implements PipeTransform {
+export class SearchPipe implements PipeTransform {
 
   transform(array: any[], searchText: any): any[] {
     if (!searchText) {
@@ -12,7 +11,8 @@ export class DataFilterPipe implements PipeTransform {
     }
     else {
       let search = searchText.toLowerCase();
-      return array.filter(x => { return x.name.toLowerCase().includes(search) || x.description.toLowerCase().includes(search) })
+      return array.filter(x => { return x.tagDescription.toLowerCase().includes(search) || x.tagDescription.toLowerCase().includes(search) })
     }
   }
+
 }
