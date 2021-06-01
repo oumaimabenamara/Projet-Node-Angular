@@ -38,9 +38,10 @@ export class ResetPasswordComponent implements OnInit {
     this.loginRegisterService.resetPassword(this.resetPasswordForm.value).subscribe((response: any[]) => {
       console.log(response)
       this.router.navigateByUrl('/login');
-      this.toasterService.pop('success', 'Success', 'email has been reset successfully');
+      this.toasterService.pop('success', 'Success', 'password has been reset successfully');
     }, error => {
       console.log(error);
+      this.toasterService.pop('error', 'Error', 'link is expired');
     })
 
   }
