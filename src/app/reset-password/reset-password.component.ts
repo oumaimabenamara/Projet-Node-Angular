@@ -13,20 +13,20 @@ import { ToasterService } from 'angular2-toaster';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResetPasswordComponent implements OnInit {
-
-  companyId: any;
   submitted = false;
-  resetPasswordForm: FormGroup = new FormGroup({
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    confirmNewPassword: new FormControl('', [Validators.required, Validators.minLength(5)])
-  }, {
-    validators: [pwNewConfirmationValidator]
-  });
+  resetPasswordForm: FormGroup;
 
   constructor(private router: Router, private loginRegisterService: LoginRegisterService, private activatedRoute: ActivatedRoute, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
-    this.companyId = this.activatedRoute.snapshot.params['found'];
+    const token = this.activatedRoute.snapshot.params['token'];
+    this.resetPasswordForm = new FormGroup({
+      token: new FormControl(token),
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      confirmNewPassword: new FormControl('', [Validators.required, Validators.minLength(5)])
+    }, {
+      validators: [pwNewConfirmationValidator]
+    });
   }
 
   submit() {
@@ -35,13 +35,14 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
 
-    this.loginRegisterService.resetPassword(this.resetPasswordForm.value.newPassword).subscribe((response: any[]) => {
+    this.loginRegisterService.resetPassword(this.resetPasswordForm.value).subscribe((response: any[]) => {
       console.log(response)
+      this.router.navigateByUrl('/login');
       this.toasterService.pop('success', 'Success', 'email has been reset successfully');
     }, error => {
       console.log(error);
     })
-    this.router.navigateByUrl('/login');
+
   }
 
 
