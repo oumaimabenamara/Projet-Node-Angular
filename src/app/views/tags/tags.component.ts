@@ -69,6 +69,7 @@ export class TagsComponent implements OnInit {
       if (result.value) {
         this.tagService.deleteTagById(id).subscribe((response: any) => {
           this.ngOnInit();
+          this.toasterService.pop('success', 'Success', 'Tag deleted successfully');
         }, error => {
           console.log(error);
         })
@@ -102,8 +103,6 @@ export class TagsComponent implements OnInit {
       this.ngOnInit()
       this.modal.hide();
       this.toasterService.pop('success', 'Success', 'Tag added succusfuly');
-
-
     }, error => {
       console.log(error);
     })
