@@ -11,7 +11,7 @@ export class SearchPipe implements PipeTransform {
     }
     else {
       let search = searchText.toLowerCase();
-      return array.filter(x => { return x.tagDescription.toLowerCase().includes(search) || x.tagDescription.toLowerCase().includes(search) })
+      return array.filter(x => { return x.tagDescription.toLowerCase().includes(search) || x.tagName.toLowerCase().includes(search) })
     }
   }
 
