@@ -33,9 +33,8 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.changes.disconnect();
   }
 
-  logoutFunction()
-  {
-    this.logoutService.Logout().subscribe((response: any) =>{
+  logoutFunction() {
+    this.logoutService.Logout().subscribe((response: any) => {
       localStorage.removeItem('token');
       this.route.navigate(['/login'])
       this.toasterService.pop('success', 'Success', 'logged out successfully');
