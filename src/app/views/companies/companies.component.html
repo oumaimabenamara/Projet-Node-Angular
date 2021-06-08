@@ -3,13 +3,14 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i>List Of Companies
+                    <i class="fa fa-align-justify"></i>Companies List
                 </div>
                 <div class="card-body">
                     <!-- Button trigger modal -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <button type="button" class="btn btn-primary my-1 float-right" data-toggle="modal" (click)="showModalAdd()">
+                            <button type="button" *ngIf="companyRole == 'superAdmin'" class="btn btn-primary my-1 float-right" data-toggle="modal"
+                                (click)="showModalAdd()">
                                 <i class="fa fa-plus"></i> Add
                                 Company</button>
                         </div>
@@ -18,26 +19,36 @@
 
                     <div class="row mb-3">
                         <div class="col-md-4 offset-md-8">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                </div>
+                                <input type="text" class="form-control" [(ngModel)]="searchText"
+                                    placeholder="Search ..." />
                             </div>
-                            <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search by ..."/>
-                          </div>
                         </div>
-                      </div>
+                    </div>
 
 
                     <div class="col-sm-12">
-                        <table  class="table table-striped table-hover table-responsive-lg" [mfData]="data | search : searchText" #mf="mfDataTable" [mfRowsOnPage]="5">
+                        <table class="table table-striped table-hover table-responsive-lg"
+                            [mfData]="data | search : searchText" #mf="mfDataTable" [mfRowsOnPage]="5">
                             <thead>
                                 <tr>
-                                    <th><mfDefaultSorter by="companyName">Company Name</mfDefaultSorter></th>
-                                    <th><mfDefaultSorter by="companyDescription">Company Description</mfDefaultSorter></th>
-                                    <th><mfDefaultSorter by="role">Role</mfDefaultSorter></th>
-                                    <th><mfDefaultSorter by="email">Email</mfDefaultSorter></th>
+                                    <th>
+                                        <mfDefaultSorter by="companyName">Company Name</mfDefaultSorter>
+                                    </th>
+                                    <th>
+                                        <mfDefaultSorter by="companyDescription">Company Description</mfDefaultSorter>
+                                    </th>
+                                    <th>
+                                        <mfDefaultSorter by="role">Role</mfDefaultSorter>
+                                    </th>
+                                    <th>
+                                        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                                    </th>
                                     <th>Actions</th>
-                                </tr>   
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -47,8 +58,10 @@
                                     <td>{{item.role}}</td>
                                     <td>{{item.email}}</td>
                                     <td>
-                                        <button class="btn btn-info text-white" (click)="showModalEdit(item._id)"><i class="fa fa-edit"></i> Edit</button>
-                                        <button class="btn btn-danger my-1" (click)="deleteCompany(item._id)"><i class="fa fa-trash"></i> Delete</button>
+                                        <button class="btn btn-info text-white" (click)="showModalEdit(item._id)"><i
+                                                class="fa fa-edit"></i> Edit</button>
+                                        <button class="btn btn-danger my-1" *ngIf="companyId !== item._id" (click)="deleteCompany(item._id)"><i
+                                                class="fa fa-trash"></i> Delete</button>
                                         <br>
                                     </td>
                                 </tr>
@@ -56,12 +69,12 @@
 
                             <tfoot>
                                 <tr>
-                                  <td colspan="5">
-                                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
-                                  </td>
+                                    <td colspan="5">
+                                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                                    </td>
                                 </tr>
                             </tfoot>
-                    </table>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -88,7 +101,7 @@
                 <form [formGroup]="companyForm" (ngSubmit)="addCompanyFunction()">
                     <div class="form-group">
                         <label for="name">Company Name :</label>
-                        <input type="text" class="form-control" id="name" placeholder="Company name"
+                        <input type="text" class="form-control" id="name" placeholder="Type the company name"
                             formControlName="companyName"
                             [ngClass]="{'is-invalid': submitted && companyForm.controls.companyName.errors, 'is-valid': submitted && !companyForm.controls.companyName.errors}">
                         <div class="invalid-feedback d-block">
@@ -99,8 +112,8 @@
 
                     <div class="form-group">
                         <label for="description">Company Description :</label>
-                        <input type="text" class="form-control" id="description" placeholder="Company description"
-                            formControlName="companyDescription"
+                        <input type="text" class="form-control" id="description"
+                            placeholder="Type the company description" formControlName="companyDescription"
                             [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}">
                         <div class="invalid-feedback d-block">
                             <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">
@@ -109,8 +122,42 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="companyRole">Compnay Role :</label>
+                        <label for="email">Company Email :</label>
+                        <input type="text" class="form-control" placeholder="Type the company email"
+                            formControlName="email"
+                            [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && companyForm.controls.email.hasError('required')">email required
+                            </div>
+                            <div *ngIf="submitted && companyForm.controls.email.hasError('email')">email invalid</div>
+                        </div>
+                    </div>
 
+                    <div *ngIf="!noPWD" class="form-group">
+                        <label for="password">Company Password :</label>
+                        <input type="password" class="form-control" placeholder="Type the company password"
+                            formControlName="password"
+                            [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && companyForm.controls.password.hasError('required')">password
+                                required</div>
+                            <div *ngIf="submitted && companyForm.controls.password.hasError('minlength')">password
+                                invalid >5</div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label for="companyPhoto">Company Photo :</label><br>
+                        <input type="file" name="companyPhoto" formControlName="companyPhoto"
+                            [ngClass]="{'is-invalid': submitted && companyForm.controls.companyPhoto.errors, 'is-valid': submitted && !companyForm.controls.companyPhoto.errors}">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="companyPhoto">Company Photo :</label><br>
+                        <input type="file" name="companyPhoto" accept="image/*" (change)="onSelectImage($event)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyRole">Company Role :</label>
                         <select name="companyRole" id="companyRole" formControlName="role" class="form-control"
                             [ngClass]="{'is-invalid': submitted && companyForm.controls.role.errors, 'is-valid': submitted && !companyForm.controls.role.errors}">
                             <option value="admin">Admin</option>
@@ -122,37 +169,14 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Email" formControlName="email"
-                                [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
-                        </div>
-                        <div class="invalid-feedback d-block">
-                            <div *ngIf="submitted && companyForm.controls.email.hasError('required')">email required
-                            </div>
-                            <div *ngIf="submitted && companyForm.controls.email.hasError('email')">email invalid</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group mb-4">
-                            <input type="password" class="form-control" placeholder="Password"
-                                formControlName="password"
-                                [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
-                        </div>
-                        <div class="invalid-feedback d-block">
-                            <div *ngIf="submitted && companyForm.controls.password.hasError('required')">password
-                                required</div>
-                            <div *ngIf="submitted && companyForm.controls.password.hasError('minlength')">password
-                                invalid >5</div>
-                        </div>
-                    </div>
-
+                    <img *ngIf="file" [src]="file">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
-                        <button type="submit" *ngIf="!showEditButton" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-primary" (click)="editCompany()" *ngIf="showEditButton">Save changes</button>
-
+                        <button type="submit" class="btn btn-primary " *ngIf="!showEditButton"><i class="fa fa-save">
+                                Save</i></button>
+                        <button type="button" class="btn btn-primary " (click)="editCompany()" *ngIf="showEditButton"><i
+                                class="fa fa-save"> Save changes</i></button>
+                        <button type="button" class="btn btn-secondary" (click)="hideModal()"><i
+                                class="fa fa-arrow-left"> Cancel</i></button>
                     </div>
                 </form>
             </div>

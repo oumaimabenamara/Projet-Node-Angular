@@ -20,32 +20,8 @@ export class EventsComponent implements OnInit {
 
   @ViewChild('primaryModal') public primaryModal: ModalDirective;
 
-  // Datepicker
-
-  // minDate = new Date(2017, 5, 10);
-  // maxDate = new Date(2018, 9, 15);
-
-  // bsValue: Date = new Date();
-  // bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
-
-  // Timepicker
-
-  // public hstep: number = 1;
-  // public mstep: number = 15;
-  // public ismeridian: boolean = true;
-  // public isEnabled: boolean = true;
-
-  // public mytime: Date = new Date();
-  // public options: any = {
-  //   hstep: [1, 2, 3],
-  //   mstep: [1, 5, 10, 15, 25, 30]
-  // };
-
-
-
-
   // myID: any;
-  // showEditButton = false;
+  file: File;
   showEditButton = false;
   editEventId: any;
   modalTitle = "Add Event";
@@ -54,7 +30,7 @@ export class EventsComponent implements OnInit {
   submitted = false;
   addEditEventForm: FormGroup = new FormGroup({
     eventName: new FormControl('', [Validators.required]),
-    // photo: new FormControl('', [Validators.required]),
+    // eventPhoto: new FormControl('', [Validators.required]),
     // tags: new FormControl('', [Validators.required]),
     eventDescription: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
@@ -63,9 +39,30 @@ export class EventsComponent implements OnInit {
     endTime: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
     numberOfTickets: new FormControl('', [Validators.required]),
-    // eventType: new FormControl('', [Validators.required]),
+    eventType: new FormControl('paid', [Validators.required]),
     price: new FormControl('', [Validators.required]),
   });
+
+    // Datepicker
+    minDate1 = new Date();
+    // maxDate1 = new Date(2018, 9, 15);
+    minDate2 = this.addEditEventForm.value.startDate;
+    // maxDate2 = new Date(2018, 9, 15);
+  
+    bsValue: Date = new Date();
+    bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
+  
+    // Timepicker
+    public hstep: number = 1;
+    public mstep: number = 15;
+    public ismeridian: boolean = true;
+    public isEnabled: boolean = true;
+  
+    public mytime: Date = new Date();
+    public options: any = {
+      hstep: [1, 2, 3],
+      mstep: [1, 5, 10, 15, 25, 30]
+    };
 
   constructor(private eventService : EventService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
 
@@ -73,6 +70,12 @@ export class EventsComponent implements OnInit {
 
   ngOnInit(): void {
     this.listOfEvents();
+  }
+
+  onSelectImage(event){
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+    }
   }
 
 
@@ -119,11 +122,18 @@ export class EventsComponent implements OnInit {
     {
       return ;
     }
+
+    const formData = new FormData();
+    Object.keys(this.addEditEventForm.value).forEach(key =>{
+      formData.append(key, this.addEditEventForm.value[key]);
+    });
+    formData.append('image', this.file, this.file.name);
+    
   
     this.eventService.addEvent(this.addEditEventForm.value).subscribe(response=>{
       this.submitted = false;
       this.listOfEvents();
-      // this.addEditEventForm.reset();
+      this.addEditEventForm.reset();
       this.hideModal();
       this.toasterService.pop('success', 'Success', 'Event added successfully');
     }, error=>{
@@ -145,11 +155,24 @@ export class EventsComponent implements OnInit {
 
   editEvent()
   {
+    this.submitted = true;
+    if(this.addEditEventForm.invalid)
+    {
+      return ;
+    }
+
+    // const formData = new FormData();
+    // Object.keys(this.addEditEventForm.value).forEach(key =>{
+    //   formData.append(key, this.addEditEventForm.value[key]);
+    // });
+    // formData.append('image', this.file, this.file.name);
+
     this.eventService.editEventById(this.editEventId, this.addEditEventForm.value).subscribe((response: any)=>{
       this.ngOnInit();
       this.hideModal();
-      // this.addEditEventForm.reset();
+      this.addEditEventForm.reset();
       this.toasterService.pop('success', 'Success', 'Event edited successfully');
+      this.submitted = false;
     }, error=>{
       console.log(error);
     })

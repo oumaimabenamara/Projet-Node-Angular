@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i>List Of Events
+                    <i class="fa fa-align-justify"></i>Events List
                 </div>
                 <div class="card-body">
                     <!-- Button trigger modal -->
@@ -21,7 +21,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fa fa-search"></i></span>
                             </div>
-                            <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search by ..."/>
+                            <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search ..."/>
                           </div>
                         </div>
                       </div>
@@ -84,9 +84,9 @@
     <!--/.row-->
 </div>
 
-<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" eventType="dialog" aria-labelledby="modalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" eventType="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">{{modalTitle}}</h4>
@@ -102,7 +102,7 @@
 
                     <div class="form-group">
                         <label for="name">Event Name :</label>
-                        <input type="text" class="form-control" id="name" placeholder="Type event name here"
+                        <input type="text" class="form-control" id="name" placeholder="Type your event name"
                             formControlName="eventName"
                             [ngClass]="{'is-invalid': submitted && addEditEventForm.controls.eventName.errors, 'is-valid': submitted && !addEditEventForm.controls.eventName.errors}">
                         <div class="invalid-feedback d-block">
@@ -123,7 +123,7 @@
                     <div class="form-group">
                         <label for="description">Event Description :</label>
                         <textarea class="form-control" row="10" id="description"
-                            placeholder="Type event description here" formControlName="eventDescription"
+                            placeholder="Type your event description" formControlName="eventDescription"
                             [ngClass]="{'is-invalid': submitted && addEditEventForm.controls.eventDescription.errors, 'is-valid': submitted && !addEditEventForm.controls.eventDescription.errors}"></textarea>
                         <div class="invalid-feedback d-block">
                             <div
@@ -132,13 +132,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="eventPhoto">Event Photo :</label><br>
+                        <input type="file" name="eventPhoto" accept="image/*" (change)="onSelectImage($event)">
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="animated fadeIn">
                                     <label for="startDate">Start Date :</label>
-                                    <input type="text" class="form-control" [minDate]="minDate"
-                                        [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker
+                                    <input type="text" class="form-control" [minDate]="minDate1"
+                                         #dp="bsDatepicker" bsDatepicker
                                         [(bsValue)]="bsValue" formControlName="startDate">
                                     <div class="invalid-feedback d-block">
                                         <div
@@ -152,8 +157,8 @@
                             <div class="form-group">
                                 <div class="animated fadeIn">
                                     <label for="endDate">End Date :</label>
-                                    <input type="text" class="form-control" [minDate]="minDate"
-                                        [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker
+                                    <input type="text" class="form-control" [minDate]="minDate2"
+                                         #dp="bsDatepicker" bsDatepicker
                                         [(bsValue)]="bsValue" formControlName="endDate">
                                     <div class="invalid-feedback d-block">
                                         <div
@@ -213,23 +218,11 @@
                     <div class="form-group">
                         <label for="location">Location :</label>
                         <input type="text" class="form-control" id="location"
-                            placeholder="Type your event location here" formControlName="location"
+                            placeholder="Type your event location" formControlName="location"
                             [ngClass]="{'is-invalid': submitted && addEditEventForm.controls.location.errors, 'is-valid': submitted && !addEditEventForm.controls.location.errors}">
                         <div class="invalid-feedback d-block">
                             <div *ngIf="submitted && addEditEventForm.controls.location.hasError('required')">
                                 location is required.</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="numberOfTickets">Number Of Tickets :</label>
-                        <input type="number" id="numberOfTickets" name="numberOfTickets" min="1" max="100"
-                            formControlName="numberOfTickets"
-                            [ngClass]="{'is-invalid': submitted && addEditEventForm.controls.numberOfTickets.errors, 'is-valid': submitted && !addEditEventForm.controls.numberOfTickets.errors}">
-                        <div class="invalid-feedback d-block">
-                            <div
-                                *ngIf="submitted && addEditEventForm.controls.numberOfTickets.hasError('required')">
-                                numberOfTickets is required.</div>
                         </div>
                     </div>
 
@@ -251,6 +244,31 @@
                     </div>  -->
 
                     <div class="form-group">
+                        <label for="eventType">Event Type :</label>
+                        <select name="eventType" id="eventType" formControlName="eventType" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addEditEventForm.controls.eventType.errors, 'is-valid': submitted && !addEditEventForm.controls.eventType.errors}">
+                            <option value="paid">Paid</option>
+                            <option value="free">Free</option>
+                        </select>
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && addEditEventForm.controls.eventType.hasError('required')">
+                                Event type is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numberOfTickets">Number Of Tickets :</label>
+                        <input type="number" id="numberOfTickets" name="numberOfTickets" min="1" max="100"
+                            formControlName="numberOfTickets"
+                            [ngClass]="{'is-invalid': submitted && addEditEventForm.controls.numberOfTickets.errors, 'is-valid': submitted && !addEditEventForm.controls.numberOfTickets.errors}">
+                        <div class="invalid-feedback d-block">
+                            <div
+                                *ngIf="submitted && addEditEventForm.controls.numberOfTickets.hasError('required')">
+                                numberOfTickets is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="price">Price :</label>
                         <input type="number" id="price" name="price" min="1" max="100" formControlName="price"
                             [ngClass]="{'is-invalid': submitted && addEditEventForm.controls.price.errors, 'is-valid': submitted && !addEditEventForm.controls.price.errors}">
@@ -269,9 +287,9 @@
                         (click)="cancelEventChanges()">Cancel</button> -->
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
-                            <button type="submit" *ngIf="!showEditButton" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-primary" (click)="editEvent()" *ngIf="showEditButton">Save changes</button>
+                            <button type="submit" class="btn btn-primary " *ngIf="!showEditButton" ><i class="fa fa-save"> Save</i></button>
+                            <button type="button" class="btn btn-primary " (click)="editEvent()" *ngIf="showEditButton"><i class="fa fa-save"> Save changes</i></button>
+                            <button type="button" class="btn btn-secondary" (click)="hideModal()"><i class="fa fa-arrow-left"> Cancel</i></button>
                         </div>
                 </form>
 

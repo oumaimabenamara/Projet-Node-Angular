@@ -46,6 +46,7 @@ export class TagsComponent implements OnInit {
     this.modalTitle = "Add tag"
     this.showEditButton = false
   };
+  
   showModalEdit(id: any) {
     this.modal.show();
     this.modalTitle = "Edit tag";
@@ -58,10 +59,10 @@ export class TagsComponent implements OnInit {
       console.log(error);
     })
   };
+
   hideModal() {
     this.modal.hide();
     this.addTagForm.reset();
-
   }
 
   deleteTag(id) {
@@ -79,6 +80,11 @@ export class TagsComponent implements OnInit {
   };
 
   editTag() {
+    this.submitted = true;
+    if (this.addTagForm.invalid) {
+      return;
+    }
+
     this.tagService.editTagById(this.editTagId, this.addTagForm.value).subscribe((response: any) => {
       // console.log(response);
       this.ngOnInit()
@@ -86,6 +92,7 @@ export class TagsComponent implements OnInit {
       this.addTagForm.reset();
       // this.modal.show();
       this.toasterService.pop('success', 'Success', 'Tag edited successfully');
+      this.submitted = false;
     }, error => {
       console.log(error);
     })
