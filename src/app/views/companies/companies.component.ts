@@ -19,6 +19,8 @@ export class CompaniesComponent implements OnInit {
 
   @ViewChild('modal') modal: ModalDirective;
 
+  public imagePath;
+  imgURL: any;
   noPWD = false;
   companyId: any;
   companyRole: any
@@ -63,6 +65,12 @@ export class CompaniesComponent implements OnInit {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
     }
+    var reader = new FileReader();
+    this.imagePath = this.file;
+    reader.readAsDataURL(this.file);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
   }
 
   showModalAdd() {
@@ -88,6 +96,9 @@ export class CompaniesComponent implements OnInit {
   hideModal() {
     this.modal.hide();
     this.companyForm.reset();
+    this.imagePath = null;
+    this.imgURL = null;
+    this.file = null;
   }
 
   addCompanyFunction() {
@@ -104,6 +115,9 @@ export class CompaniesComponent implements OnInit {
     formData.append('image', this.file, this.file.name);
 
     this.companyService.addCompany(formData).subscribe(response => {
+      this.imagePath = null;
+      this.imgURL = null;
+      this.file = null;
       this.submitted = false;
       this.listOfCompanies();
       this.companyForm.reset();
@@ -143,6 +157,9 @@ export class CompaniesComponent implements OnInit {
     formData.append('image', this.file, this.file.name);
 
     this.companyService.editCompanyById(this.editCompanyId, formData).subscribe((response: any) => {
+      this.imagePath = null;
+      this.imgURL = null;
+      this.file = null;
       this.ngOnInit();
       this.hideModal();
       this.companyForm.reset();

@@ -146,17 +146,7 @@
                         </div>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label for="companyPhoto">Company Photo :</label><br>
-                        <input type="file" name="companyPhoto" formControlName="companyPhoto"
-                            [ngClass]="{'is-invalid': submitted && companyForm.controls.companyPhoto.errors, 'is-valid': submitted && !companyForm.controls.companyPhoto.errors}">
-                    </div> -->
-                    <div class="form-group">
-                        <label for="companyPhoto">Company Photo :</label><br>
-                        <input type="file" name="companyPhoto" accept="image/*" (change)="onSelectImage($event)">
-                    </div>
-
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="companyRole == 'superAdmin'">
                         <label for="companyRole">Company Role :</label>
                         <select name="companyRole" id="companyRole" formControlName="role" class="form-control"
                             [ngClass]="{'is-invalid': submitted && companyForm.controls.role.errors, 'is-valid': submitted && !companyForm.controls.role.errors}">
@@ -169,7 +159,14 @@
                         </div>
                     </div>
 
-                    <img *ngIf="file" [src]="file">
+                  
+                    <div class="form-group">
+                        <label for="companyPhoto">Company Photo :</label><br>
+                        <input type="file" name="companyPhoto" accept="image/*" (change)="onSelectImage($event)">
+                        <img [src]="imgURL" height="200" width="200" *ngIf="imgURL">
+                    </div>
+
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary " *ngIf="!showEditButton"><i class="fa fa-save">
                                 Save</i></button>

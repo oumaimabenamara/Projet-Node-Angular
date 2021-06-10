@@ -1,0 +1,104 @@
+<app-header
+  [navbarBrandRouterLink]="['/dashboard']"
+  [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/BBBB.png', width: 89, height: 25, alt: 'pib'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/new.png', width: 30, height: 30, alt: 'pib'}"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="'lg'">
+  <ul class="nav navbar-nav d-md-down-none">
+    <li class="nav-item px-1">
+      <div class="input-group ">
+        <div class="input-group-prepend input-group-lg">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search events" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      
+    </li>
+  </ul>
+<ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown d-md-down-none" dropdown placement="bottom right">
+ </li>
+  <li class="nav-item dropdown" dropdown placement="bottom right">
+    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+     <button class="btn btn-link">Browse Events</button>
+    </a>
+</li>
+<li class="nav-item dropdown" dropdown placement="bottom right">
+  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+   <button class="btn btn-link">Create Account</button>
+  </a>
+</li>
+ <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+       <button class="btn btn-link">Help</button>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+      <a class="dropdown-item" href="#"><i class="fa fa-user"></i> FAQ</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i>Contact Support</a>
+   <button class="dropdown-item" (click)="logoutFunction()"><i class="fa fa-lock"></i> Logout</button>
+      </div>
+    </li>
+ <!-- <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+        <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>Account</strong></div>
+        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Account Settings</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i>Manage my Events</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-ticket"></i> Tickets<span class="badge badge-dark">42</span></a>
+       <button class="dropdown-item" (click)="logoutFunction()"><i class="fa fa-lock"></i> Logout</button>
+      </div>
+    </li> -->
+  </ul>
+</app-header>
+
+
+<!-- 
+<div class="animated fadeIn">
+    <div class="row events-cards" >
+      <div *ngFor="let item of eventsArray; let i=index" class="col-sm-6 col-md-4">
+        <div class="card">
+          <div class="card-header">
+            {{item.eventName}}
+          </div>
+          <div class="card-body">
+      <div class="container">
+          <img src="{{item.eventPhoto}}" alt="eventPhoto">
+          <button class="btn" routerLink="['eventsDetails',{id:item._id}]">See More</button>
+      </div>
+          </div>
+      <div class="card-footer">
+      {{item.price}}
+      <br>
+      {{item.location}}
+      </div>
+        </div>
+        </div>
+      </div>
+   </div> -->
+
+   
+<div class="animated fadeIn">
+    <div class="row events-cards" >
+      <div class="col-2" style="margin: 10px;">
+        <div class="card">
+          <div class="card-header">
+            zegeagezmgaem
+          </div>
+          <div class="card-body">
+      <div class="container">
+          <img src="" alt="eventPhoto">
+          <button class="btn">See More</button>
+      </div>
+          </div>
+      <div class="card-footer">
+   564512
+      <br>
+      tuniie
+      </div>
+        </div>
+        </div>
+      </div>
+   </div>

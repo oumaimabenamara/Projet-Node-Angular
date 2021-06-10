@@ -39,6 +39,7 @@ import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 // import { DataFilterPipe } from './views/tables/datatable/datafilterpipe';
 import { DataTableModule } from 'angular2-datatable';
+import { HomeComponent } from './views/home/home.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { DataTableModule } from 'angular2-datatable';
     ResetPasswordComponent,
     MyLoginComponent,
     MyRegisterComponent,
+    HomeComponent,
 
     // TagAddComponent,
     // TagEditComponent,
