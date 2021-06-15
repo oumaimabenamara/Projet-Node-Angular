@@ -65,7 +65,7 @@ export class CompaniesComponent implements OnInit {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
     }
-    var reader = new FileReader();
+    const reader = new FileReader();
     this.imagePath = this.file;
     reader.readAsDataURL(this.file);
     reader.onload = (_event) => {

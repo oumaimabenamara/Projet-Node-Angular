@@ -135,6 +135,7 @@
                     <div class="form-group">
                         <label for="eventPhoto">Event Photo :</label><br>
                         <input type="file" name="eventPhoto" accept="image/*" (change)="onSelectImage($event)">
+                        <img [src]="imgURL" height="150" width="150" *ngIf="imgURL">
                     </div>
 
                     <div class="row">

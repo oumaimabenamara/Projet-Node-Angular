@@ -14,13 +14,16 @@ import { SweetalertService } from '../../services/sweetalert.service';
     '../../../scss/vendors/bs-datepicker/bs-datepicker.scss',
     '../../../scss/vendors/ng-select/ng-select.scss',
     '../../../scss/vendors/toastr/toastr.scss'],
-    encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
 })
 export class EventsComponent implements OnInit {
 
   @ViewChild('primaryModal') public primaryModal: ModalDirective;
 
   // myID: any;
+
+  public imagePath;
+  imgURL: any;
   file: File;
   showEditButton = false;
   editEventId: any;
@@ -43,28 +46,28 @@ export class EventsComponent implements OnInit {
     price: new FormControl('', [Validators.required]),
   });
 
-    // Datepicker
-    minDate1 = new Date();
-    // maxDate1 = new Date(2018, 9, 15);
-    minDate2 = this.addEditEventForm.value.startDate;
-    // maxDate2 = new Date(2018, 9, 15);
-  
-    bsValue: Date = new Date();
-    bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
-  
-    // Timepicker
-    public hstep: number = 1;
-    public mstep: number = 15;
-    public ismeridian: boolean = true;
-    public isEnabled: boolean = true;
-  
-    public mytime: Date = new Date();
-    public options: any = {
-      hstep: [1, 2, 3],
-      mstep: [1, 5, 10, 15, 25, 30]
-    };
+  // Datepicker
+  minDate1 = new Date();
+  // maxDate1 = new Date(2018, 9, 15);
+  minDate2 = this.addEditEventForm.value.startDate;
+  // maxDate2 = new Date(2018, 9, 15);
 
-  constructor(private eventService : EventService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
+  bsValue: Date = new Date();
+  bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
+
+  // Timepicker
+  public hstep: number = 1;
+  public mstep: number = 15;
+  public ismeridian: boolean = true;
+  public isEnabled: boolean = true;
+
+  public mytime: Date = new Date();
+  public options: any = {
+    hstep: [1, 2, 3],
+    mstep: [1, 5, 10, 15, 25, 30]
+  };
+
+  constructor(private eventService: EventService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
 
   @ViewChild('modal') modal: ModalDirective;
 
@@ -72,71 +75,77 @@ export class EventsComponent implements OnInit {
     this.listOfEvents();
   }
 
-  onSelectImage(event){
+  onSelectImage(event) {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
+    }
+    const reader = new FileReader();
+    this.imagePath = this.file;
+    reader.readAsDataURL(this.file);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
     }
   }
 
 
-  listOfEvents()
-  {
-    this.eventService.getAllEvents().subscribe((response: any[] )=>{
+  listOfEvents() {
+    this.eventService.getAllEvents().subscribe((response: any[]) => {
       this.data = response;
-    }, error=>{
+    }, error => {
       console.log(error);
     })
   }
 
-  showModalAdd()
-  {
+  showModalAdd() {
     this.showEditButton = false;
     this.modal.show();
     this.modalTitle = "Add event";
   }
 
-  showModalEdit(id: any)
-  {
+  showModalEdit(id: any) {
     this.showEditButton = true;
     this.modal.show();
     this.modalTitle = "Edit event";
     this.editEventId = id;
-    this.eventService.getEventById(this.editEventId).subscribe((response: any)=>{
+    this.eventService.getEventById(this.editEventId).subscribe((response: any) => {
       this.addEditEventForm.patchValue(response);
-    }, error=>{
+    }, error => {
       console.log(error);
     })
   }
 
-  hideModal()
-  {
+  hideModal() {
     this.modal.hide();
     this.addEditEventForm.reset();
+    this.imagePath = null;
+    this.imgURL = null;
+    this.file = null;
   }
 
 
-  addEventFunction()
-  {
+  addEventFunction() {
     this.submitted = true;
-    if(this.addEditEventForm.invalid)
-    {
-      return ;
+    if (this.addEditEventForm.invalid) {
+      return;
     }
 
     const formData = new FormData();
-    Object.keys(this.addEditEventForm.value).forEach(key =>{
+    Object.keys(this.addEditEventForm.value).forEach(key => {
       formData.append(key, this.addEditEventForm.value[key]);
     });
     formData.append('image', this.file, this.file.name);
-    
-  
-    this.eventService.addEvent(this.addEditEventForm.value).subscribe(response=>{
+
+
+    this.eventService.addEvent(this.addEditEventForm.value).subscribe(response => {
+      this.imagePath = null;
+      this.imgURL = null;
+      this.file = null;
       this.submitted = false;
       this.listOfEvents();
       this.addEditEventForm.reset();
       this.hideModal();
       this.toasterService.pop('success', 'Success', 'Event added successfully');
-    }, error=>{
+    }, error => {
       console.log(error);
     })
   }
@@ -153,27 +162,28 @@ export class EventsComponent implements OnInit {
     })
   }
 
-  editEvent()
-  {
+  editEvent() {
     this.submitted = true;
-    if(this.addEditEventForm.invalid)
-    {
-      return ;
+    if (this.addEditEventForm.invalid) {
+      return;
     }
 
-    // const formData = new FormData();
-    // Object.keys(this.addEditEventForm.value).forEach(key =>{
-    //   formData.append(key, this.addEditEventForm.value[key]);
-    // });
-    // formData.append('image', this.file, this.file.name);
+    const formData = new FormData();
+    Object.keys(this.addEditEventForm.value).forEach(key => {
+      formData.append(key, this.addEditEventForm.value[key]);
+    });
+    formData.append('image', this.file, this.file.name);
 
-    this.eventService.editEventById(this.editEventId, this.addEditEventForm.value).subscribe((response: any)=>{
+    this.eventService.editEventById(this.editEventId, this.addEditEventForm.value).subscribe((response: any) => {
+      this.imagePath = null;
+      this.imgURL = null;
+      this.file = null;
       this.ngOnInit();
       this.hideModal();
       this.addEditEventForm.reset();
       this.toasterService.pop('success', 'Success', 'Event edited successfully');
       this.submitted = false;
-    }, error=>{
+    }, error => {
       console.log(error);
     })
   }
@@ -187,7 +197,7 @@ export class EventsComponent implements OnInit {
   //   {
   //     return ;
   //   }
-  
+
   //   this.eventService.addEvent(this.addEditEventForm.value).subscribe(response=>{
   //     this.addEditEventForm.reset();
   //     this.submitted = false;
