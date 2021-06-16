@@ -12,12 +12,17 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './views/home/home.component';
+import { EventDetailsComponent } from './views/event-details/event-details.component';
 
 
 export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'event-details/:id',
+    component: EventDetailsComponent,
   },
   {
     path: '',

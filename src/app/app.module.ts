@@ -40,6 +40,8 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 // import { DataFilterPipe } from './views/tables/datatable/datafilterpipe';
 import { DataTableModule } from 'angular2-datatable';
 import { HomeComponent } from './views/home/home.component';
+import { EventDetailsComponent } from './views/event-details/event-details.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import { HomeComponent } from './views/home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     ToasterModule,
-    DataTableModule
+    DataTableModule,
+    ModalModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -74,6 +77,8 @@ import { HomeComponent } from './views/home/home.component';
     MyLoginComponent,
     MyRegisterComponent,
     HomeComponent,
+    EventDetailsComponent,
+
 
     // TagAddComponent,
     // TagEditComponent,
