@@ -1,45 +1,101 @@
 <app-header
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/BBBB.png', width: 89, height: 25, alt: 'pib'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/new.png', width: 30, height: 30, alt: 'pib'}"
+  [navbarBrandFull]="{
+    src: 'assets/img/brand/BBBB.png',
+    width: 89,
+    height: 25,
+    alt: 'pib'
+  }"
+  [navbarBrandMinimized]="{
+    src: 'assets/img/brand/new.png',
+    width: 30,
+    height: 30,
+    alt: 'pib'
+  }"
   [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
+  [asideMenuToggler]="'lg'"
+>
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-1">
-      <div class="input-group ">
+      <div class="input-group">
         <div class="input-group-prepend input-group-lg">
-          <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+          <span class="input-group-text" id="basic-addon1"
+            ><i class="fa fa-search"></i
+          ></span>
         </div>
-        <input type="text" class="form-control" placeholder="Search events" aria-label="Username" aria-describedby="basic-addon1">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search events"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
       </div>
-      
     </li>
   </ul>
-<ul class="nav navbar-nav ml-auto">
-    <li class="nav-item dropdown d-md-down-none" dropdown placement="bottom right">
- </li>
-  <li class="nav-item dropdown" dropdown placement="bottom right">
-    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-     <button class="btn btn-link"  routerLink="/home">Browse Events</button>
-    </a>
-</li>
-<li class="nav-item dropdown" dropdown placement="bottom right">
-  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-   <button class="btn btn-link" routerLink="/login">Create Account</button>
-  </a>
-</li>
- <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-       <button class="btn btn-link">Help</button>
+  <ul class="nav navbar-nav ml-auto">
+    <li
+      class="nav-item dropdown d-md-down-none"
+      dropdown
+      placement="bottom right"
+    ></li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <button class="btn btn-link" routerLink="/home">Browse Events</button>
       </a>
-      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-      <a class="dropdown-item" href="#"><i class="fa fa-user"></i> FAQ</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i>Contact Support</a>
-   <button class="dropdown-item" (click)="logoutFunction()"><i class="fa fa-lock"></i> Logout</button>
+    </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <button class="btn btn-link" routerLink="/login">Create Account</button>
+      </a>
+    </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <button class="btn btn-link">Help</button>
+      </a>
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        *dropdownMenu
+        aria-labelledby="simple-dropdown"
+      >
+        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> FAQ</a>
+        <a class="dropdown-item" href="#"
+          ><i class="fa fa-wrench"></i>Contact Support</a
+        >
+        <button class="dropdown-item" (click)="logoutFunction()">
+          <i class="fa fa-lock"></i> Logout
+        </button>
       </div>
     </li>
- <!-- <li class="nav-item dropdown" dropdown placement="bottom right">
+    <!-- <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
         <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/>
       </a>
@@ -54,141 +110,44 @@
   </ul>
 </app-header>
 
-
-<!-- 
-<div class="animated fadeIn">
-    <div class="row events-cards" >
-      <div *ngFor="let item of eventsArray; let i=index" class="col-sm-6 col-md-4">
-        <div class="card">
-          <div class="card-header">
-            {{item.eventName}}
-          </div>
-          <div class="card-body">
-      <div class="container">
-          <img src="{{item.eventPhoto}}" alt="eventPhoto">
-          <button class="btn" routerLink="['eventsDetails',{id:item._id}]">See More</button>
-      </div>
-          </div>
-      <div class="card-footer">
-      {{item.price}}
-      <br>
-      {{item.location}}
-      </div>
+<div class="animated fadeIn" style="margin-top: 2cm">
+  <div class="row events-cards">
+    <div
+      *ngFor="let item of eventsArray; let i = index"
+      class="col-sm-6 col-md-4"
+    >
+      <div class="card">
+        <div class="card-header">
+          <img
+            class="img-fluid w-100"
+            src="{{ 'http://localhost:3000/event-uploads/' + item.eventPhoto }}"
+            alt="eventPhoto"
+          />
         </div>
-        </div>
-      </div>
-   </div> -->
-
-   
-<div class="animated fadeIn mt-5 ml-3">
-    <div class="row events-cards" >
-      <div class="col-2" style="margin: 10px;">
-        <div class="card">
-          <div class="card-header">
-            zegeagezmgaem
+        <div class="card-body">
+          <div class="container">
+            <h1>
+              {{ item.eventName }}
+            </h1>
+            <p>
+              {{ item.eventDescription | slice: "0-10" }} ...
+              <button
+                class="btn-primary"
+                [routerLink]="['/event-details', item._id]"
+              >
+                See More
+              </button>
+            </p>
           </div>
-          <div class="card-body">
-      <div class="container">
-          <!-- <img src="app/views/assets/backgrounds-img/samantha-gades-fIHozNWfcvs-unsplash.jpg" alt="eventPhoto"> -->
-          <button class="btn">See More</button>
-      </div>
-          </div>
-      <div class="card-footer">
-   564512
-      <br>
-      tuniie
-      </div>
         </div>
-        </div>
-      <div class="col-2" style="margin: 10px;">
-        <div class="card">
-          <div class="card-header">
-            zegeagezmgaem
+        <div class="card-footer">
+          <div class="d-flex justify-content-between">
+            <span class="badge bg-success">{{ item.location }}</span>
+            <span class="badge bg-primary">{{ item.eventType }}</span>
+            <span class="badge bg-info">{{ item.price }} $</span>
           </div>
-          <div class="card-body">
-      <div class="container">
-          <!-- <img src="app/views/assets/backgrounds-img/samantha-gades-fIHozNWfcvs-unsplash.jpg" alt="eventPhoto"> -->
-          <button class="btn">See More</button>
-      </div>
-          </div>
-      <div class="card-footer">
-   564512
-      <br>
-      tuniie
-      </div>
-        </div>
-        </div>
-      <div class="col-2" style="margin: 10px;">
-        <div class="card">
-          <div class="card-header">
-            zegeagezmgaem
-          </div>
-          <div class="card-body">
-      <div class="container">
-          <!-- <img src="app/views/assets/backgrounds-img/samantha-gades-fIHozNWfcvs-unsplash.jpg" alt="eventPhoto"> -->
-          <button class="btn">See More</button>
-      </div>
-          </div>
-      <div class="card-footer">
-   564512
-      <br>
-      tuniie
-      </div>
-        </div>
-        </div>
-      <div class="col-2" style="margin: 10px;">
-        <div class="card">
-          <div class="card-header">
-            zegeagezmgaem
-          </div>
-          <div class="card-body">
-      <div class="container">
-          <!-- <img src="app/views/assets/backgrounds-img/samantha-gades-fIHozNWfcvs-unsplash.jpg" alt="eventPhoto"> -->
-          <button class="btn">See More</button>
-      </div>
-          </div>
-      <div class="card-footer">
-   564512
-      <br>
-      tuniie
-      </div>
-        </div>
-        </div>
-      <div class="col-2" style="margin: 10px;">
-        <div class="card">
-          <div class="card-header">
-            zegeagezmgaem
-          </div>
-          <div class="card-body">
-      <div class="container">
-          <!-- <img src="app/views/assets/backgrounds-img/samantha-gades-fIHozNWfcvs-unsplash.jpg" alt="eventPhoto"> -->
-          <button class="btn">See More</button>
-      </div>
-          </div>
-      <div class="card-footer">
-   564512
-      <br>
-      tuniie
-      </div>
-        </div>
-        </div>
-      <div class="col-2" style="margin: 10px;">
-        <div class="card">
-          <div class="card-header">
-            zegeagezmgaem
-          </div>
-          <div class="card-body">
-      <div class="container">
-          <!-- <img src="app/views/assets/backgrounds-img/samantha-gades-fIHozNWfcvs-unsplash.jpg" alt="eventPhoto"> -->
-          <button class="btn">See More</button>
-      </div>
-          </div>
-      <div class="card-footer">
-   564512
-      <br>
-      tuniie
-      </div>
-        </div>
         </div>
       </div>
-   </div>
+    </div>
+  </div>
+</div>

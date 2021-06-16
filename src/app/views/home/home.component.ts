@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { HomenologinService } from '../../services/homenologin.service';
 
@@ -9,6 +10,7 @@ import { HomenologinService } from '../../services/homenologin.service';
 })
 export class HomeComponent implements OnInit {
   eventsArray: any[];
+
   constructor(private homenologinService: HomenologinService) { }
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class HomeComponent implements OnInit {
       console.log(error);
     })
   }
+
 
 
 

@@ -12,5 +12,8 @@ export class HomenologinService {
   getAllEvents() {
     return this.http.get(`${this.baseUrl}/events-nologin`);
   }
+  getEventById(id: any) {
+    return this.http.get(`${this.baseUrl}/events-nologin/${id}`);
+  }
 
 }

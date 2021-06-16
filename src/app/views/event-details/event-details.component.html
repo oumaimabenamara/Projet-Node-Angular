@@ -1,0 +1,322 @@
+<app-header
+  [navbarBrandRouterLink]="['/dashboard']"
+  [fixed]="true"
+  [navbarBrandFull]="{
+    src: 'assets/img/brand/BBBB.png',
+    width: 89,
+    height: 25,
+    alt: 'pib'
+  }"
+  [navbarBrandMinimized]="{
+    src: 'assets/img/brand/new.png',
+    width: 30,
+    height: 30,
+    alt: 'pib'
+  }"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="'lg'"
+>
+  <ul class="nav navbar-nav d-md-down-none">
+    <li class="nav-item px-1">
+      <div class="input-group">
+        <div class="input-group-prepend input-group-lg">
+          <span class="input-group-text" id="basic-addon1"
+            ><i class="fa fa-search"></i
+          ></span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search events"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li
+      class="nav-item dropdown d-md-down-none"
+      dropdown
+      placement="bottom right"
+    ></li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <button class="btn btn-link" routerLink="/home">Browse Events</button>
+      </a>
+    </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <button class="btn btn-link" routerLink="/login">Create Account</button>
+      </a>
+    </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <button class="btn btn-link">Help</button>
+      </a>
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        *dropdownMenu
+        aria-labelledby="simple-dropdown"
+      >
+        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> FAQ</a>
+        <a class="dropdown-item" href="#"
+          ><i class="fa fa-wrench"></i>Contact Support</a
+        >
+        <button class="dropdown-item" (click)="logoutFunction()">
+          <i class="fa fa-lock"></i> Logout
+        </button>
+      </div>
+    </li>
+  </ul>
+</app-header>
+
+<!-- <div class="container mx-2 my-1">
+    <div class="row">
+        <h1>{{EVENT.eventName}}</h1>
+    </div>
+    <div class="row">
+        <img src="{{EVENT.eventPhoto}}" alt="eventPhoto">
+    </div>
+    <div class="row">
+        <h2>  {{EVENT.eventsDetails}}</h2>
+    </div>
+</div> -->
+<!-- <div class="animated fadeIn" style="margin-top: 2cm">
+  <div class="row events-card mx-5">
+    <div class="card">
+      <div class="card-header">
+        <h1>{{ EVENT.eventName | uppercase }}</h1>
+        <h5 style="font-weight: lighter">by comapny name</h5>
+      </div>
+
+      <div class="card-body">
+        <div class="container">
+          <img
+            src="{{ 'http://localhost:3000/event-uploads' + EVENT.eventPhoto }}"
+            alt="eventPhoto"
+          />
+        </div>
+        <div class="container">
+          {{ EVENT.location }}
+          <h1>Event Description:</h1>
+          {{ EVENT.eventDescription }}
+          <h5>Ticket Price : {{ EVENT.price }} tnd</h5>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button type="button" class="btn btn-dark">
+          <i class="fa fa-ticket" aria-hidden="true"></i> Get Tickets
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- modal -->
+<!-- modal -->
+<!-- modal -->
+<!-- modal -->
+<!-- modal -->
+<!-- modal -->
+<!-- modal -->
+<div class="animated fadeIn" style="margin-top: 2cm">
+  <div class="row events-card mx-5">
+    <!-- <div class="col-sm-12"> -->
+    <div class="card">
+      <div class="card-header">
+        <!-- <i class="fa fa-align-justify"></i> -->
+        <h1>{{ EVENT.eventName | uppercase }}</h1>
+        <h5 style="font-weight: lighter">by comapny name</h5>
+      </div>
+
+      <div class="card-body">
+        <div class="container">
+          <img
+            class="img-fluid"
+            src="{{
+              'http://localhost:3000/event-uploads/' + EVENT.eventPhoto
+            }}"
+            alt="eventPhoto"
+          />
+        </div>
+        <div class="container">
+          {{ EVENT.location }}
+          <h1>Event Description:</h1>
+          {{ EVENT.eventDescription }}
+          <h5>Ticket Price : {{ EVENT.price }} tnd</h5>
+        </div>
+
+        <div class="card-footer">
+          <!-- <div class="container"> -->
+          <button
+            type="button"
+            class="btn btn-dark mr-1"
+            data-toggle="modal"
+            (click)="infoModal.show()"
+          >
+            <i class="fa fa-ticket" aria-hidden="true"></i> Get Tickets
+          </button>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
+
+  <div
+    bsModal
+    #infoModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button
+            type="button"
+            class="close"
+            (click)="infoModal.hide()"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form [formGroup]="getTicketsForm" (ngSubmit)="getTicketFunction()">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="userFirstName">First Name :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="userFirstName"
+                placeholder="Type your userFirstName name"
+                formControlName="userFirstNameName"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && getTicketsForm.controls.userFirstName.errors,
+                  'is-valid':
+                    submitted && !getTicketsForm.controls.userFirstName.errors
+                }"
+              />
+              <div class="invalid-feedback d-block">
+                <div
+                  *ngIf="
+                    submitted &&
+                    getTicketsForm.controls.userFirstName.hasError('required')
+                  "
+                >
+                  first name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="userLastName">Last Name :</label>
+              <input
+                type="text"
+                class="form-control"
+                id="userLastName"
+                placeholder="Type your userLastName name"
+                formControlName="userLastNameName"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && getTicketsForm.controls.userLastName.errors,
+                  'is-valid':
+                    submitted && !getTicketsForm.controls.userLastName.errors
+                }"
+              />
+              <div class="invalid-feedback d-block">
+                <div
+                  *ngIf="
+                    submitted &&
+                    getTicketsForm.controls.userLastName.hasError('required')
+                  "
+                >
+                  first name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="userEmail">Email :</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Type the company userEmail"
+                formControlName="userEmail"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && getTicketsForm.controls.userEmail.errors,
+                  'is-valid':
+                    submitted && !getTicketsForm.controls.userEmail.errors
+                }"
+              />
+              <div class="invalid-feedback d-block">
+                <div
+                  *ngIf="
+                    submitted &&
+                    getTicketsForm.controls.userEmail.hasError('required')
+                  "
+                >
+                  Email required
+                </div>
+                <div
+                  *ngIf="
+                    submitted &&
+                    getTicketsForm.controls.userEmail.hasError('email')
+                  "
+                >
+                  Email invalid
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="infoModal.hide()"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-info">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

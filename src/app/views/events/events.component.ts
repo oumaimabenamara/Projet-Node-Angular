@@ -36,10 +36,10 @@ export class EventsComponent implements OnInit {
     // eventPhoto: new FormControl('', [Validators.required]),
     // tags: new FormControl('', [Validators.required]),
     eventDescription: new FormControl('', [Validators.required]),
-    startDate: new FormControl('', [Validators.required]),
-    endDate: new FormControl('', [Validators.required]),
-    startTime: new FormControl('', [Validators.required]),
-    endTime: new FormControl('', [Validators.required]),
+    // startDate: new FormControl('', [Validators.required]),
+    // endDate: new FormControl('', [Validators.required]),
+    // startTime: new FormControl('', [Validators.required]),
+    // endTime: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
     numberOfTickets: new FormControl('', [Validators.required]),
     eventType: new FormControl('paid', [Validators.required]),
@@ -79,6 +79,8 @@ export class EventsComponent implements OnInit {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
     }
+    console.log(this.file.name);
+
     const reader = new FileReader();
     this.imagePath = this.file;
     reader.readAsDataURL(this.file);
@@ -133,21 +135,23 @@ export class EventsComponent implements OnInit {
     Object.keys(this.addEditEventForm.value).forEach(key => {
       formData.append(key, this.addEditEventForm.value[key]);
     });
+    console.log(this.file.name);
     formData.append('image', this.file, this.file.name);
 
 
-    this.eventService.addEvent(this.addEditEventForm.value).subscribe(response => {
-      this.imagePath = null;
-      this.imgURL = null;
-      this.file = null;
-      this.submitted = false;
-      this.listOfEvents();
-      this.addEditEventForm.reset();
-      this.hideModal();
-      this.toasterService.pop('success', 'Success', 'Event added successfully');
+    this.eventService.addEvent(formData).subscribe(response => {
+
     }, error => {
       console.log(error);
     })
+    this.imagePath = null;
+    this.imgURL = null;
+    this.file = null;
+    this.submitted = false;
+    this.listOfEvents();
+    this.addEditEventForm.reset();
+    this.hideModal();
+    this.toasterService.pop('success', 'Success', 'Event added successfully');
   }
 
   deleteEvent(id: any) {
