@@ -11,7 +11,7 @@ export class SearchPipe implements PipeTransform {
     }
     else{
       let search = searchText.toLowerCase();
-      return array.filter(x=>{ return x.eventName?.toLowerCase().includes(search) || x.eventType?.toLowerCase().includes(search) || x.location?.toLowerCase().includes(search) || x.numberOfTickets?.includes(search) || x.price?.includes(search)})
+      return array.filter(x=>{ return x?.eventName?.toLowerCase().includes(search) || x?.eventType?.toLowerCase().includes(search) || x?.location?.toLowerCase().includes(search) || x?.numberOfTickets.toString()?.includes(search) || x?.price?.includes(search)})
     }
   }
 
