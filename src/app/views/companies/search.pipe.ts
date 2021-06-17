@@ -12,7 +12,7 @@ export class SearchPipe implements PipeTransform {
     }
     else{
       let search = searchText.toLowerCase();
-      return array.filter(x=>{ return x.companyName?.toLowerCase().includes(search) || x.companyDescription?.toLowerCase().includes(search) || x.email?.toLowerCase().includes(search)})
+      return array.filter(x=>{ return x.companyName?.toLowerCase().includes(search) || x.companyDescription?.toLowerCase().includes(search) || x.email?.toLowerCase().includes(search) || x.role?.toLowerCase().includes(search)})
     }
   }
 
