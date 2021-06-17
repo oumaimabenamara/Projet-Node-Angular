@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { IOption } from 'ng-select';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { EventService } from '../../services/event.service';
 import { SweetalertService } from '../../services/sweetalert.service';
+import { TagService } from '../../services/tag.service';
 
 @Component({
   selector: 'app-events',
@@ -22,6 +24,7 @@ export class EventsComponent implements OnInit {
 
   // myID: any;
 
+  allTags: any;
   public imagePath;
   imgURL: any;
   file: File;
@@ -34,7 +37,7 @@ export class EventsComponent implements OnInit {
   addEditEventForm: FormGroup = new FormGroup({
     eventName: new FormControl('', [Validators.required]),
     // eventPhoto: new FormControl('', [Validators.required]),
-    // tags: new FormControl('', [Validators.required]),
+    tags: new FormControl('', [Validators.required]),
     eventDescription: new FormControl('', [Validators.required]),
     // startDate: new FormControl('', [Validators.required]),
     // endDate: new FormControl('', [Validators.required]),
@@ -67,12 +70,30 @@ export class EventsComponent implements OnInit {
     mstep: [1, 5, 10, 15, 25, 30]
   };
 
-  constructor(private eventService: EventService, private toasterService: ToasterService, private sweetalert: SweetalertService) { }
+
+
+    // ng2-select
+    public AllTags: Array<IOption> = [];
+  
+    public selectedCountries: Array<string> = [];
+
+  constructor(private eventService: EventService, private toasterService: ToasterService, private sweetalert: SweetalertService, private tagService: TagService) { }
 
   @ViewChild('modal') modal: ModalDirective;
 
   ngOnInit(): void {
     this.listOfEvents();
+    this.tagService.getAllTags().subscribe((response: any[]) => {
+      const tagsFormated = response.map( item =>{
+        const newObject = {"label": item.tagName, "value": item._id};
+        return newObject;
+      })
+      this.AllTags = tagsFormated;
+      // console.log(tagsFormated); 
+
+    }, error => {
+      console.log(error);
+    })
   }
 
   onSelectImage(event) {

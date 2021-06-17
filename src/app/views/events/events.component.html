@@ -438,6 +438,16 @@
               </div>
             </div>
           </div>
+
+
+          <fieldset class="form-group">
+            <ng-select
+            class="bootstrap"
+            placeholder="Add Tags To Your Event"
+            [options]="AllTags"
+            [multiple]="true"
+            formControlName="tags"></ng-select>
+          </fieldset>
           <!-- <button type="submit" class="btn btn-success btn-block"
                         *ngIf="!showEditButton">Save</button>
 

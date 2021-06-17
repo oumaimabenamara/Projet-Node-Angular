@@ -5,13 +5,12 @@ import { EventsRoutingModule } from './events-routing.module';
 import { EventsComponent } from './events.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { AdvancedFormsComponent } from '../forms/advanced-forms/advanced-forms.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ToasterModule } from 'angular2-toaster';
 import { DataTableModule } from 'angular2-datatable';
 import { SearchPipe } from './search.pipe';
-// import { DataFilterPipe } from '../tables/datatable/datafilterpipe';
+import { SelectModule } from 'ng-select';
 
 
 @NgModule({
@@ -25,11 +24,11 @@ import { SearchPipe } from './search.pipe';
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    // AdvancedFormsComponent,
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToasterModule,
-    DataTableModule
+    DataTableModule,
+    SelectModule
   ]
 })
 export class EventsModule { }

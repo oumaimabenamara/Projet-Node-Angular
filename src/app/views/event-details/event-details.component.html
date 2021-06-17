@@ -134,6 +134,9 @@
           >
             <i class="fa fa-ticket" aria-hidden="true"></i> Get Tickets
           </button>
+          <div *ngFor="let tag of EVENT.tags">
+            <span class="badge bg-info">{{tag.tagName}}</span>
+          </div>
           <!-- </div> -->
         </div>
       </div>
