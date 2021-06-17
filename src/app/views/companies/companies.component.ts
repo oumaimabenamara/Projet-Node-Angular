@@ -24,7 +24,7 @@ export class CompaniesComponent implements OnInit {
   noPWD = false;
   companyId: any;
   companyRole: any
-  file: File;
+  file: File = null;
   showEditButton = false;
   editCompanyId: any;
   modalTitle = "Add company";
@@ -112,7 +112,10 @@ export class CompaniesComponent implements OnInit {
     Object.keys(this.companyForm.value).forEach(key => {
       formData.append(key, this.companyForm.value[key]);
     });
-    formData.append('image', this.file, this.file.name);
+    if(this.file !== null)
+    {
+      formData.append('image', this.file, this.file.name);
+    }
 
     this.companyService.addCompany(formData).subscribe(response => {
       this.imagePath = null;
@@ -155,7 +158,10 @@ export class CompaniesComponent implements OnInit {
         formData.append(key, this.companyForm.value[key]);
       }
     });
-    formData.append('image', this.file, this.file.name);
+    if(this.file !== null)
+    {
+      formData.append('image', this.file, this.file.name);
+    }
 
     this.companyService.editCompanyById(this.editCompanyId, formData).subscribe((response: any) => {
       this.imagePath = null;

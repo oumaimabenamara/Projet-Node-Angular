@@ -131,6 +131,7 @@
             class="btn btn-dark mr-1"
             data-toggle="modal"
             (click)="infoModal.show()"
+            [disabled]="EVENT?.numberOfTickets == 0"
           >
             <i class="fa fa-ticket" aria-hidden="true"></i> Get Tickets
           </button>
