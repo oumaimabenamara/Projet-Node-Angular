@@ -28,7 +28,7 @@ export class TagsComponent implements OnInit {
     tagName: new FormControl('', [Validators.required]),
     tagDescription: new FormControl('', [Validators.required]),
   });
-  constructor(private router: Router, private tagService: TagService, private sweetalert: SweetalertService, private toasterService: ToasterService) { this.toasterService = toasterService }
+  constructor(private router: Router, private tagService: TagService, private sweetalert: SweetalertService, private toasterService: ToasterService) {}
 
   ngOnInit(): void {
     this.tagService.getAllTags().subscribe((response: any[]) => {
@@ -107,7 +107,7 @@ export class TagsComponent implements OnInit {
       // console.log(response);
       this.addTagForm.reset();
       this.submitted = false;
-      this.ngOnInit()
+      this.ngOnInit();
       this.modal.hide();
       this.toasterService.pop('success', 'Success', 'Tag added succusfuly');
     }, error => {

@@ -98,64 +98,13 @@
   </ul>
 </app-header>
 
-<!-- <div class="container mx-2 my-1">
-    <div class="row">
-        <h1>{{EVENT.eventName}}</h1>
-    </div>
-    <div class="row">
-        <img src="{{EVENT.eventPhoto}}" alt="eventPhoto">
-    </div>
-    <div class="row">
-        <h2>  {{EVENT.eventsDetails}}</h2>
-    </div>
-</div> -->
-<!-- <div class="animated fadeIn" style="margin-top: 2cm">
-  <div class="row events-card mx-5">
-    <div class="card">
-      <div class="card-header">
-        <h1>{{ EVENT.eventName | uppercase }}</h1>
-        <h5 style="font-weight: lighter">by comapny name</h5>
-      </div>
-
-      <div class="card-body">
-        <div class="container">
-          <img
-            src="{{ 'http://localhost:3000/event-uploads' + EVENT.eventPhoto }}"
-            alt="eventPhoto"
-          />
-        </div>
-        <div class="container">
-          {{ EVENT.location }}
-          <h1>Event Description:</h1>
-          {{ EVENT.eventDescription }}
-          <h5>Ticket Price : {{ EVENT.price }} tnd</h5>
-        </div>
-      </div>
-
-      <div class="card-footer">
-        <button type="button" class="btn btn-dark">
-          <i class="fa fa-ticket" aria-hidden="true"></i> Get Tickets
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- modal -->
-<!-- modal -->
-<!-- modal -->
-<!-- modal -->
-<!-- modal -->
-<!-- modal -->
-<!-- modal -->
 <div class="animated fadeIn" style="margin-top: 2cm">
-  <div class="row events-card mx-5">
-    <!-- <div class="col-sm-12"> -->
+
+  <div class="row events-card mx-5" *ngIf="EVENT">
     <div class="card">
       <div class="card-header">
-        <!-- <i class="fa fa-align-justify"></i> -->
         <h1>{{ EVENT.eventName | uppercase }}</h1>
-        <h5 style="font-weight: lighter">by comapny name</h5>
+        <h5 style="font-weight: lighter">by (((comapny name)))</h5>
       </div>
 
       <div class="card-body">
@@ -189,8 +138,8 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
   </div>
+
 
   <div
     bsModal
@@ -203,8 +152,9 @@
   >
     <div class="modal-dialog modal-info" role="document">
       <div class="modal-content">
+
         <div class="modal-header">
-          <h4 class="modal-title">Modal title</h4>
+          <h4 class="modal-title">Get A Ticket</h4>
           <button
             type="button"
             class="close"
@@ -218,25 +168,25 @@
         <form [formGroup]="getTicketsForm" (ngSubmit)="getTicketFunction()">
           <div class="modal-body">
             <div class="form-group">
-              <label for="userFirstName">First Name :</label>
+              <label for="firstName">First Name :</label>
               <input
                 type="text"
                 class="form-control"
-                id="userFirstName"
-                placeholder="Type your userFirstName name"
-                formControlName="userFirstNameName"
+                id="firstName"
+                placeholder="Type your first name"
+                formControlName="firstName"
                 [ngClass]="{
                   'is-invalid':
-                    submitted && getTicketsForm.controls.userFirstName.errors,
+                    submitted && getTicketsForm.controls.firstName.errors,
                   'is-valid':
-                    submitted && !getTicketsForm.controls.userFirstName.errors
+                    submitted && !getTicketsForm.controls.firstName.errors
                 }"
               />
               <div class="invalid-feedback d-block">
                 <div
                   *ngIf="
                     submitted &&
-                    getTicketsForm.controls.userFirstName.hasError('required')
+                    getTicketsForm.controls.firstName.hasError('required')
                   "
                 >
                   first name is required.
@@ -245,25 +195,25 @@
             </div>
 
             <div class="form-group">
-              <label for="userLastName">Last Name :</label>
+              <label for="lastName">Last Name :</label>
               <input
                 type="text"
                 class="form-control"
-                id="userLastName"
-                placeholder="Type your userLastName name"
-                formControlName="userLastNameName"
+                id="lastName"
+                placeholder="Type your last name"
+                formControlName="lastName"
                 [ngClass]="{
                   'is-invalid':
-                    submitted && getTicketsForm.controls.userLastName.errors,
+                    submitted && getTicketsForm.controls.lastName.errors,
                   'is-valid':
-                    submitted && !getTicketsForm.controls.userLastName.errors
+                    submitted && !getTicketsForm.controls.lastName.errors
                 }"
               />
               <div class="invalid-feedback d-block">
                 <div
                   *ngIf="
                     submitted &&
-                    getTicketsForm.controls.userLastName.hasError('required')
+                    getTicketsForm.controls.lastName.hasError('required')
                   "
                 >
                   first name is required.
@@ -272,24 +222,24 @@
             </div>
 
             <div class="form-group">
-              <label for="userEmail">Email :</label>
+              <label for="email">Email :</label>
               <input
                 type="text"
                 class="form-control"
-                placeholder="Type the company userEmail"
-                formControlName="userEmail"
+                placeholder="Type your e-mail"
+                formControlName="email"
                 [ngClass]="{
                   'is-invalid':
-                    submitted && getTicketsForm.controls.userEmail.errors,
+                    submitted && getTicketsForm.controls.email.errors,
                   'is-valid':
-                    submitted && !getTicketsForm.controls.userEmail.errors
+                    submitted && !getTicketsForm.controls.email.errors
                 }"
               />
               <div class="invalid-feedback d-block">
                 <div
                   *ngIf="
                     submitted &&
-                    getTicketsForm.controls.userEmail.hasError('required')
+                    getTicketsForm.controls.email.hasError('required')
                   "
                 >
                   Email required
@@ -297,7 +247,7 @@
                 <div
                   *ngIf="
                     submitted &&
-                    getTicketsForm.controls.userEmail.hasError('email')
+                    getTicketsForm.controls.email.hasError('email')
                   "
                 >
                   Email invalid
@@ -305,17 +255,19 @@
               </div>
             </div>
           </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="infoModal.hide()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-info">Get My Ticket</button>
+          </div>
         </form>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="infoModal.hide()"
-          >
-            Close
-          </button>
-          <button type="button" class="btn btn-info">Save changes</button>
-        </div>
+
       </div>
     </div>
   </div>

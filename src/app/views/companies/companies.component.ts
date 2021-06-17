@@ -122,6 +122,7 @@ export class CompaniesComponent implements OnInit {
       this.listOfCompanies();
       this.companyForm.reset();
       this.hideModal();
+      this.ngOnInit();
       this.toasterService.pop('success', 'Success', 'Company added successfully');
     }, error => {
       console.log(error);
