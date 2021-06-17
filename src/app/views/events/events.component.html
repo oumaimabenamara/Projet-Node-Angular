@@ -41,9 +41,7 @@
           <div class="col-sm-12">
             <table
               class="table table-striped table-hover table-responsive-lg"
-              [mfData]="data | search: searchText"
-              #mf="mfDataTable"
-              [mfRowsOnPage]="5"
+              [mfData]="data | search: searchText" #mf="mfDataTable" [mfRowsOnPage]="5"
             >
               <thead>
                 <tr>
@@ -60,11 +58,11 @@
                     <mfDefaultSorter by="location">Location</mfDefaultSorter>
                   </th>
                   <!-- <th>Description</th> -->
-                  <th>
+                  <!-- <th>
                     <mfDefaultSorter by="date"
                       >Start and End Date</mfDefaultSorter
                     >
-                  </th>
+                  </th> -->
                   <th>
                     <mfDefaultSorter by="time"
                       >Start and End Time</mfDefaultSorter
@@ -89,9 +87,8 @@
                   <td>{{ item.eventType }}</td>
                   <td>{{ item.location }}</td>
                   <!-- <td>{{item.eventDescription | lowercase | slice:0:3}}...</td> -->
-                  <!-- <td>{{item.startDate | date:'d/M/y'}}-{{item.endDate | date:'d/M/y'}}</td>
-                                    <td>{{item.startTime | date:'shortTime'}}-{{item.endTime | date:'shortTime'}}
-                                    </td> -->
+                  <!-- <td>{{item.startDate | date:'d/M/y'}}-{{item.endDate | date:'d/M/y'}}</td> -->
+                  <td>{{item.startTime | date:'shortTime'}}-{{item.endTime | date:'shortTime'}}</td>
                   <td>{{ item.numberOfTickets }}</td>
                   <td>{{ item.price }}</td>
                   <td>
@@ -235,9 +232,9 @@
             <img [src]="imgURL" height="150" width="150" *ngIf="imgURL" />
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-6">
-              <!-- <div class="form-group">
+              <div class="form-group">
                                 <div class="animated fadeIn">
                                     <label for="startDate">Start Date :</label>
                                     <input type="text" class="form-control" [minDate]="minDate1"
@@ -249,10 +246,10 @@
                                             Start date is required.</div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
             </div>
             <div class="col-md-6">
-              <!-- <div class="form-group">
+              <div class="form-group">
                                 <div class="animated fadeIn">
                                     <label for="endDate">End Date :</label>
                                     <input type="text" class="form-control" [minDate]="minDate2"
@@ -265,47 +262,47 @@
                                             date is required.</div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <div class="animated fadeIn">
-                  <!-- <label for="startTime">Start Time :</label>
+                  <label for="startTime">Start Time :</label>
                                     <timepicker [hourStep]="hstep" [minuteStep]="mstep"
                                         [showMeridian]="ismeridian" [readonlyInput]="!isEnabled"
-                                        formControlName="startTime"></timepicker> -->
+                                        formControlName="startTime"></timepicker>
                   <!-- <timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep"
                                 [minuteStep]="mstep" [showMeridian]="ismeridian"
                                 [readonlyInput]="!isEnabled" 
                                 formControlName="startTime"></timepicker> -->
-                  <!-- <div class="invalid-feedback d-block">
+                  <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.startTime.hasError('required')">
                                             Start time is required.</div>
-                                    </div> -->
+                                    </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <div class="animated fadeIn">
-                  <!-- <label for="endTime">End Time :</label>
+                  <label for="endTime">End Time :</label>
                                     <timepicker [hourStep]="hstep" [minuteStep]="mstep"
                                         [showMeridian]="ismeridian" [readonlyInput]="!isEnabled"
-                                        formControlName="endTime"></timepicker> -->
+                                        formControlName="endTime"></timepicker>
                   <!-- <timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep"
                                 [minuteStep]="mstep" [showMeridian]="ismeridian"
                                 [readonlyInput]="!isEnabled" 
                                 formControlName="endTime"></timepicker> -->
-                  <!-- <div class="invalid-feedback d-block">
+                  <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.endTime.hasError('required')">
                                             End
                                             time is required.</div>
-                                    </div> -->
+                                    </div>
                 </div>
               </div>
             </div>

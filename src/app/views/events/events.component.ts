@@ -27,7 +27,7 @@ export class EventsComponent implements OnInit {
   allTags: any;
   public imagePath;
   imgURL: any;
-  file: File;
+  file: File = null;
   showEditButton = false;
   editEventId: any;
   modalTitle = "Add Event";
@@ -41,8 +41,8 @@ export class EventsComponent implements OnInit {
     eventDescription: new FormControl('', [Validators.required]),
     // startDate: new FormControl('', [Validators.required]),
     // endDate: new FormControl('', [Validators.required]),
-    // startTime: new FormControl('', [Validators.required]),
-    // endTime: new FormControl('', [Validators.required]),
+    startTime: new FormControl('', [Validators.required]),
+    endTime: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
     numberOfTickets: new FormControl('', [Validators.required]),
     eventType: new FormControl('paid', [Validators.required]),
@@ -50,7 +50,7 @@ export class EventsComponent implements OnInit {
   });
 
   // Datepicker
-  minDate1 = new Date();
+  minDate1 = Date.now();
   // maxDate1 = new Date(2018, 9, 15);
   minDate2 = this.addEditEventForm.value.startDate;
   // maxDate2 = new Date(2018, 9, 15);
@@ -156,8 +156,11 @@ export class EventsComponent implements OnInit {
     Object.keys(this.addEditEventForm.value).forEach(key => {
       formData.append(key, this.addEditEventForm.value[key]);
     });
-    console.log(this.file.name);
-    formData.append('image', this.file, this.file.name);
+    if(this.file !== null)
+    {
+      // console.log(this.file.name);
+      formData.append('image', this.file, this.file.name);
+    }
 
 
     this.eventService.addEvent(formData).subscribe(response => {
@@ -198,7 +201,11 @@ export class EventsComponent implements OnInit {
     Object.keys(this.addEditEventForm.value).forEach(key => {
       formData.append(key, this.addEditEventForm.value[key]);
     });
-    formData.append('image', this.file, this.file.name);
+    if(this.file !== null)
+    {
+      // console.log(this.file.name);
+      formData.append('image', this.file, this.file.name);
+    }
 
     this.eventService.editEventById(this.editEventId, this.addEditEventForm.value).subscribe((response: any) => {
       this.imagePath = null;
