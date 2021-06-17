@@ -140,18 +140,19 @@ export class EventsComponent implements OnInit {
 
 
     this.eventService.addEvent(formData).subscribe(response => {
-
+      this.imagePath = null;
+      this.imgURL = null;
+      this.file = null;
+      this.submitted = false;
+      this.listOfEvents();
+      this.addEditEventForm.reset();
+      this.hideModal();
+      this.ngOnInit();
+      this.toasterService.pop('success', 'Success', 'Event added successfully');
     }, error => {
       console.log(error);
     })
-    this.imagePath = null;
-    this.imgURL = null;
-    this.file = null;
-    this.submitted = false;
-    this.listOfEvents();
-    this.addEditEventForm.reset();
-    this.hideModal();
-    this.toasterService.pop('success', 'Success', 'Event added successfully');
+   
   }
 
   deleteEvent(id: any) {

@@ -9,7 +9,7 @@ export class ReservationTicketService {
   baseUrl = environment.baseUrl
   constructor(private http: HttpClient) { }
 
-  sendReservationTicket(userInfo: any) {
-    return this.http.get(`${this.baseUrl}/events`, userInfo.email);
+  sendReservationTicket(eventID: any, userInfo: any) {
+    return this.http.post(`${this.baseUrl}/reservation/${eventID}`, userInfo);
   }
 }
