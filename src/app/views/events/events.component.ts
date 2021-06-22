@@ -143,6 +143,8 @@ export class EventsComponent implements OnInit {
     this.modalTitle = "Edit event";
     this.editEventId = id;
     this.eventService.getEventById(this.editEventId).subscribe((response: any) => {
+      response.startDate = new Date(response.startDate);
+      response.endDate = new Date(response.endDate);
       this.addEditEventForm.patchValue(response);
     }, error => {
       console.log(error);
