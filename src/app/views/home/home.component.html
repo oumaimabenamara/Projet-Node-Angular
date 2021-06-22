@@ -81,7 +81,7 @@
       >
         <button class="btn btn-link">Help</button>
       </a>
-      <div
+      <!-- <div
         class="dropdown-menu dropdown-menu-right"
         *dropdownMenu
         aria-labelledby="simple-dropdown"
@@ -93,7 +93,7 @@
         <button class="dropdown-item" (click)="logoutFunction()">
           <i class="fa fa-lock"></i> Logout
         </button>
-      </div>
+      </div> -->
     </li>
     <!-- <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
@@ -118,11 +118,19 @@
     >
       <div class="card">
         <div class="card-header">
+          <div class="container">
           <img
             class="img-fluid w-100"
             src="{{ 'http://localhost:3000/event-uploads/' + item.eventPhoto }}"
             alt="eventPhoto"
           />
+          <button
+          class="btn btn-primary"
+          [routerLink]="['/event-details', item._id]"
+        >
+          See More
+        </button>
+      </div>
         </div>
         <div class="card-body">
           <div class="container">
@@ -131,20 +139,23 @@
             </h1>
             <p>
               {{ item.eventDescription | slice: "0-10" }} ...
-              <button
-                class="btn-primary"
+              <!-- <button
+                class="btn btn-primary"
                 [routerLink]="['/event-details', item._id]"
               >
                 See More
-              </button>
+              </button> -->
             </p>
           </div>
         </div>
         <div class="card-footer">
           <div class="d-flex justify-content-between">
-            <span class="badge bg-success">{{ item.location }}</span>
-            <span class="badge bg-primary">{{ item.eventType }}</span>
-            <span class="badge bg-info">{{ item.price }} $</span>
+            <h5><span class="badge bg-success">{{ item.location }}</span></h5>
+            <!-- <span class="badge bg-success">{{ item.location }}</span> -->
+            <h5><span class="badge bg-primary">{{ item.eventType }}</span></h5>
+            <!-- <span class="badge bg-primary">{{ item.eventType }}</span> -->
+            <h5><span class="badge bg-info">{{ item.price }} $</span></h5>
+            <!-- <span class="badge bg-info">{{ item.price }} $</span> -->
           </div>
         </div>
       </div>

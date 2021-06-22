@@ -17,7 +17,7 @@
   [asideMenuToggler]="'lg'"
 >
   <ul class="nav navbar-nav d-md-down-none">
-    <li class="nav-item px-1">
+    <li class="nav-EVENT px-1">
       <div class="input-group">
         <div class="input-group-prepend input-group-lg">
           <span class="input-group-text" id="basic-addon1"
@@ -36,11 +36,11 @@
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li
-      class="nav-item dropdown d-md-down-none"
+      class="nav-EVENT dropdown d-md-down-none"
       dropdown
       placement="bottom right"
     ></li>
-    <li class="nav-item dropdown" dropdown placement="bottom right">
+    <li class="nav-EVENT dropdown" dropdown placement="bottom right">
       <a
         class="nav-link"
         data-toggle="dropdown"
@@ -54,7 +54,7 @@
         <button class="btn btn-link" routerLink="/home">Browse Events</button>
       </a>
     </li>
-    <li class="nav-item dropdown" dropdown placement="bottom right">
+    <li class="nav-EVENT dropdown" dropdown placement="bottom right">
       <a
         class="nav-link"
         data-toggle="dropdown"
@@ -68,7 +68,7 @@
         <button class="btn btn-link" routerLink="/login">Create Account</button>
       </a>
     </li>
-    <li class="nav-item dropdown" dropdown placement="bottom right">
+    <li class="nav-EVENT dropdown" dropdown placement="bottom right">
       <a
         class="nav-link"
         data-toggle="dropdown"
@@ -86,11 +86,11 @@
         *dropdownMenu
         aria-labelledby="simple-dropdown"
       >
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> FAQ</a>
-        <a class="dropdown-item" href="#"
+        <a class="dropdown-EVENT" href="#"><i class="fa fa-user"></i> FAQ</a>
+        <a class="dropdown-EVENT" href="#"
           ><i class="fa fa-wrench"></i>Contact Support</a
         >
-        <button class="dropdown-item" (click)="logoutFunction()">
+        <button class="dropdown-EVENT" (click)="logoutFunction()">
           <i class="fa fa-lock"></i> Logout
         </button>
       </div>
@@ -102,30 +102,34 @@
 
   <div class="row events-card mx-5" *ngIf="EVENT">
     <div class="card">
+
       <div class="card-header">
+        <img
+        class="img-fluid"
+        src="{{
+          'http://localhost:3000/event-uploads/' + EVENT.eventPhoto
+        }}"
+        alt="eventPhoto"
+      />
         <h1>{{ EVENT.eventName | uppercase }}</h1>
-        <h5 style="font-weight: lighter">by {{EVENT?.company?.companyName }}</h5>
+        <h5 style="font-weight: lighter">by {{EVENT?.company?.companyName}}</h5>
+        <div *ngFor="let tag of EVENT.tags">
+          <span class="badge bg-info">{{tag.tagName}}</span>
+        </div>
       </div>
 
       <div class="card-body">
-        <div class="container">
-          <img
-            class="img-fluid"
-            src="{{
-              'http://localhost:3000/event-uploads/' + EVENT.eventPhoto
-            }}"
-            alt="eventPhoto"
-          />
-        </div>
-        <div class="container">
-          <h5>Event Description:</h5>
+        <h5>Event Location : {{ EVENT.location }}</h5>
+        <h5>Ticket Price : {{ EVENT.price }} TND</h5>
+        <h5>Date : </h5>
+        <h5>Time : {{EVENT.startTime | date:'shortTime'}} - {{EVENT.endTime | date:'shortTime'}}</h5>
+        <h5>Event Type :</h5>
+        <h5>Event Description :</h5>
           {{ EVENT.eventDescription }}
-          <h5>Ticket Price : {{ EVENT.price }} TND</h5>
-          <div>Event Location : {{ EVENT.location }}</div>
-        </div>
+      </div>
 
-        <div class="card-footer">
-          <!-- <div class="container"> -->
+
+      <div class="card-footer">
           <button
             type="button"
             class="btn btn-dark mr-1"
@@ -135,12 +139,8 @@
           >
             <i class="fa fa-ticket" aria-hidden="true"></i> Get Tickets
           </button>
-          <div *ngFor="let tag of EVENT.tags">
-            <span class="badge bg-info">{{tag.tagName}}</span>
-          </div>
-          <!-- </div> -->
-        </div>
       </div>
+
     </div>
   </div>
 
@@ -268,7 +268,7 @@
             >
               Cancel
             </button>
-            <button type="submit" class="btn btn-info">Get My Ticket</button>
+            <button type="submit" class="btn btn-info" (click)="infoModal.hide()">Get My Ticket</button>
           </div>
         </form>
 

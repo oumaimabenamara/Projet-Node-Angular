@@ -21,7 +21,7 @@
  </li>
   <li class="nav-item dropdown" dropdown placement="bottom right">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-     <button class="btn btn-link">Browse Events</button>
+     <button class="btn btn-link" [routerLink]="['/home']">Browse Events</button>
     </a>
 </li>
 <li class="nav-item dropdown" dropdown placement="bottom right">
@@ -52,7 +52,7 @@
         <!-- <div class="dropdown-header text-center"><strong>Settings</strong></div> -->
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Account Settings</a>
         <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i>Manage my Events</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-ticket"></i> Tickets<span class="badge badge-dark">42</span></a>
+        <a class="dropdown-item" href="#"><i class="fa fa-ticket"></i>Events<span class="badge badge-dark">{{dashboardData?.countEvent}}</span></a>
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a> -->
         <!-- <div class="divider"></div> -->
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a> -->
@@ -61,6 +61,9 @@
     </li>
   </ul>
 </app-header>
+
+
+
 <div class="app-body">
   <app-sidebar [fixed]="true" [display]="'lg'">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
@@ -100,7 +103,10 @@
 <!-- tabset -->
   </app-aside>
 </div>
-<app-footer style="background-color: rgb(63,0,0);">
-  <span><a href="https://www.fivepoints.fr/">Event Organisation</a> &copy; 2021 Five Points</span>
-  <span class="ml-auto">Powered by <a href="https://www.fivepoints.fr/">Bechir&Omayma Corp</a></span>
+
+
+
+<app-footer style="background-color: rgb(173, 173, 173);">
+  <span><a href="https://www.fivepoints.fr/"> Event Organisation</a> &copy;  2021 Five Points</span>
+  <span class="ml-auto"> Powered by <a href="https://www.fivepoints.fr/"> Bechir&Omayma Corp</a></span>
 </app-footer>
