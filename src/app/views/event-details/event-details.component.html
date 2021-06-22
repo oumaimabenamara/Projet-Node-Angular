@@ -121,9 +121,9 @@
       <div class="card-body">
         <h5>Event Location : {{ EVENT.location }}</h5>
         <h5>Ticket Price : {{ EVENT.price }} TND</h5>
-        <h5>Date : </h5>
+        <h5>Date : {{EVENT.startDate | date:'d/M/y'}} - {{EVENT.endDate | date:'d/M/y'}}</h5>
         <h5>Time : {{EVENT.startTime | date:'shortTime'}} - {{EVENT.endTime | date:'shortTime'}}</h5>
-        <h5>Event Type :</h5>
+        <h5>Event Type : {{EVENT.eventType}}</h5>
         <h5>Event Description :</h5>
           {{ EVENT.eventDescription }}
       </div>
