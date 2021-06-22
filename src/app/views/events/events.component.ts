@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'; 
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
 import { IOption } from 'ng-select';
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -39,7 +39,7 @@ export class EventsComponent implements OnInit {
     tags: new FormControl('', [Validators.required]),
     eventDescription: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
-    endDate: new FormControl('', [Validators.required ]),
+    endDate: new FormControl('', [Validators.required]),
     startTime: new FormControl('', [Validators.required]),
     endTime: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
@@ -55,14 +55,14 @@ export class EventsComponent implements OnInit {
 
 
   // Datepicker
-  minDate = new Date(2017, 5, 10);
-  maxDate = new Date(2018, 9, 15);
-  bsValue: Date = new Date();
+  // minDate = new Date(2017, 5, 10);
+  // maxDate = new Date(2018, 9, 15);
+  // bsValue: Date = new Date();
   // bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
   
   // Datepicker
-  // minDate1 = Date.now();
-  // minDate2 = this.addEditEventForm.value.startDate;
+  minDate1 = new Date();
+  minDate2 = new Date();
 
 
   // Timepicker
@@ -89,6 +89,11 @@ export class EventsComponent implements OnInit {
   @ViewChild('modal') modal: ModalDirective;
 
   ngOnInit(): void {
+    this.addEditEventForm.controls.startDate.valueChanges.subscribe(newStartDate =>
+    {
+      this.minDate2 = new Date(newStartDate)
+    })
+    
     this.listOfEvents();
     this.tagService.getAllTags().subscribe((response: any[]) => {
       const tagsFormated = response.map( item =>{

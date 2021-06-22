@@ -241,13 +241,18 @@
                                     [minDate]="minDate1"
                                     #dp="bsDatepicker" bsDatepicker
                                     formControlName="startDate"> -->
-                                      <input type="text"
+                                      <!-- <input type="text"
                                       class="form-control"
                                       [minDate]="minDate"
                                       [maxDate]="maxDate"
                                       #dp="bsDatepicker"
                                       bsDatepicker [(bsValue)]="bsValue"
-                                      formControlName="startDate">
+                                      formControlName="startDate"> -->
+                                      <input type="text"
+                                      class="form-control"
+                                      bsDatepicker
+                                      formControlName="startDate"
+                                      [minDate]="minDate1">
                                     <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.startDate.hasError('required')">
@@ -264,13 +269,18 @@
                                     [minDate]="minDate2"
                                     #dp="bsDatepicker" bsDatepicker
                                     formControlName="endDate"> -->
-                                      <input type="text"
+                                      <!-- <input type="text"
                                       class="form-control"
                                       [minDate]="minDate"
                                       [maxDate]="maxDate"
                                       #dp="bsDatepicker"
                                       bsDatepicker [(bsValue)]="bsValue"
-                                      formControlName="endDate">
+                                      formControlName="endDate"> -->
+                                      <input type="text"
+                                      class="form-control"
+                                      bsDatepicker 
+                                      formControlName="endDate"
+                                      [minDate]="minDate2">
                                     <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.endDate.hasError('required')">
