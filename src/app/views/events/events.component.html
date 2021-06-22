@@ -58,11 +58,11 @@
                     <mfDefaultSorter by="location">Location</mfDefaultSorter>
                   </th>
                   <!-- <th>Description</th> -->
-                  <!-- <th>
+                  <th>
                     <mfDefaultSorter by="date"
                       >Start and End Date</mfDefaultSorter
                     >
-                  </th> -->
+                  </th>
                   <th>
                     <mfDefaultSorter by="time"
                       >Start and End Time</mfDefaultSorter
@@ -87,7 +87,7 @@
                   <td>{{ item.eventType }}</td>
                   <td>{{ item.location }}</td>
                   <!-- <td>{{item.eventDescription | lowercase | slice:0:3}}...</td> -->
-                  <!-- <td>{{item.startDate | date:'d/M/y'}}-{{item.endDate | date:'d/M/y'}}</td> -->
+                  <td>{{item.startDate | date:'d/M/y'}}-{{item.endDate | date:'d/M/y'}}</td>
                   <td>{{item.startTime | date:'shortTime'}}-{{item.endTime | date:'shortTime'}}</td>
                   <td>{{ item.numberOfTickets }}</td>
                   <td>{{ item.price }}</td>
@@ -241,13 +241,18 @@
                                     [minDate]="minDate1"
                                     #dp="bsDatepicker" bsDatepicker
                                     formControlName="startDate"> -->
-                                      <input type="text"
+                                      <!-- <input type="text"
                                       class="form-control"
                                       [minDate]="minDate"
                                       [maxDate]="maxDate"
                                       #dp="bsDatepicker"
                                       bsDatepicker [(bsValue)]="bsValue"
-                                      formControlName="startDate">
+                                      formControlName="startDate"> -->
+                                      <input type="text"
+                                      class="form-control"
+                                      bsDatepicker
+                                      formControlName="startDate"
+                                      [minDate]="minDate1">
                                     <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.startDate.hasError('required')">
@@ -264,13 +269,18 @@
                                     [minDate]="minDate2"
                                     #dp="bsDatepicker" bsDatepicker
                                     formControlName="endDate"> -->
-                                      <input type="text"
+                                      <!-- <input type="text"
                                       class="form-control"
                                       [minDate]="minDate"
                                       [maxDate]="maxDate"
                                       #dp="bsDatepicker"
                                       bsDatepicker [(bsValue)]="bsValue"
-                                      formControlName="endDate">
+                                      formControlName="endDate"> -->
+                                      <input type="text"
+                                      class="form-control"
+                                      bsDatepicker 
+                                      formControlName="endDate"
+                                      [minDate]="minDate2">
                                     <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.endDate.hasError('required')">
