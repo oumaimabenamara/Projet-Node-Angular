@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { ToasterService } from 'angular2-toaster';
 import { IOption } from 'ng-select';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { EventService } from '../../services/event.service';
 import { SweetalertService } from '../../services/sweetalert.service';
 import { TagService } from '../../services/tag.service';
-import { startDateValidator } from '../../validators/dateAndTimeValidator';
-import { endDateValidator } from '../../validators/dateAndTimeValidator';
 
 @Component({
   selector: 'app-events',
@@ -41,8 +38,8 @@ export class EventsComponent implements OnInit {
     // eventPhoto: new FormControl('', [Validators.required]),
     tags: new FormControl('', [Validators.required]),
     eventDescription: new FormControl('', [Validators.required]),
-    startDate: new FormControl('', [Validators.required, startDateValidator]),
-    endDate: new FormControl('', [Validators.required, endDateValidator ]),
+    startDate: new FormControl('', [Validators.required]),
+    endDate: new FormControl('', [Validators.required ]),
     startTime: new FormControl('', [Validators.required]),
     endTime: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
