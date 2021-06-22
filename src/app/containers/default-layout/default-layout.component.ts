@@ -4,6 +4,8 @@ import { navItems } from '../../_nav';
 import { LogoutService } from '../../services/logout.service';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { EventService } from '../../services/event.service';
+import { DashboardService } from '../../services/dashboard.service';
 
 
 @Component({
@@ -17,7 +19,9 @@ export class DefaultLayoutComponent implements OnDestroy {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
-  constructor(private route: Router, private toasterService: ToasterService, private logoutService: LogoutService, @Inject(DOCUMENT) _document?: any) {
+
+  dashboardData: any;
+  constructor(private route: Router, private dashboardService: DashboardService, private toasterService: ToasterService, private logoutService: LogoutService, @Inject(DOCUMENT) _document?: any) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = _document.body.classList.contains('sidebar-minimized');
@@ -31,6 +35,19 @@ export class DefaultLayoutComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.changes.disconnect();
+  }
+
+
+  ngOnInit()
+  {
+    this.showStats();
+  }
+  showStats() {
+    this.dashboardService.showStat().subscribe((response: any[]) => {
+      this.dashboardData = response;
+    }), error => {
+      console.log('error');
+    }
   }
 
   logoutFunction() {

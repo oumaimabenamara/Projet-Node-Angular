@@ -41,60 +41,9 @@
       placement="bottom right"
     ></li>
     <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a
-        class="nav-link"
-        data-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="true"
-        aria-expanded="false"
-        dropdownToggle
-        (click)="(false)"
-      >
-        <button class="btn btn-link">Browse Events</button>
-      </a>
+      <button class="btn btn-link" [routerLink]="['/home']">Home</button>
     </li>
-    <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a
-        class="nav-link"
-        data-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="true"
-        aria-expanded="false"
-        dropdownToggle
-        (click)="(false)"
-      >
-        <button class="btn btn-link">Create Account</button>
-      </a>
-    </li>
-    <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a
-        class="nav-link"
-        data-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="true"
-        aria-expanded="false"
-        dropdownToggle
-        (click)="(false)"
-      >
-        <button class="btn btn-link">Help</button>
-      </a>
-      <div
-        class="dropdown-menu dropdown-menu-right"
-        *dropdownMenu
-        aria-labelledby="simple-dropdown"
-      >
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> FAQ</a>
-        <a class="dropdown-item" href="#"
-          ><i class="fa fa-wrench"></i>Contact Support</a
-        >
-        <button class="dropdown-item" (click)="logoutFunction()">
-          <i class="fa fa-lock"></i> Logout
-        </button>
-      </div>
-    </li>
+
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a
         class="nav-link"
@@ -130,9 +79,9 @@
           ><i class="fa fa-wrench"></i>Manage my Events</a
         >
         <a class="dropdown-item" href="#"
-          ><i class="fa fa-ticket"></i> Tickets<span class="badge badge-dark"
-            >42</span
-          ></a
+          ><i class="fa fa-ticket"></i>Events<span class="badge badge-dark">{{
+            dashboardData?.countEvent
+          }}</span></a
         >
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a> -->
         <!-- <div class="divider"></div> -->
@@ -144,6 +93,7 @@
     </li>
   </ul>
 </app-header>
+
 <div class="app-body">
   <app-sidebar [fixed]="true" [display]="'lg'">
     <app-sidebar-nav
@@ -188,13 +138,14 @@
     <!-- tabset -->
   </app-aside>
 </div>
-<app-footer class=".text-white" style="background-color: rgb(45, 44, 46)">
+
+<app-footer style="background-color: rgb(173, 173, 173)">
   <span
-    ><a href="https://www.fivepoints.fr/">Event Organisation</a> &copy; 2021
+    ><a href="https://www.fivepoints.fr/"> Event Organisation</a> &copy; 2021
     Five Points</span
   >
-  <span class="ml-auto"
-    >Powered by
-    <a href="https://www.fivepoints.fr/">Bechir&Omayma Corp</a></span
+  <span class="ml-auto">
+    Powered by
+    <a href="https://www.fivepoints.fr/"> Bechir&Omayma Corp</a></span
   >
 </app-footer>

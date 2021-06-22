@@ -38,6 +38,7 @@ export class EventDetailsComponent implements OnInit {
   EventsById() {
     this.homenologinService.getEventById(this.ID).subscribe((response: any) => {
       this.EVENT = response;
+      console.log(this.EVENT);
     }, error => {
       console.log(error);
     })

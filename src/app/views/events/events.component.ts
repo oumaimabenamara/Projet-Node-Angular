@@ -7,6 +7,8 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { EventService } from '../../services/event.service';
 import { SweetalertService } from '../../services/sweetalert.service';
 import { TagService } from '../../services/tag.service';
+import { startDateValidator } from '../../validators/dateAndTimeValidator';
+import { endDateValidator } from '../../validators/dateAndTimeValidator';
 
 @Component({
   selector: 'app-events',
@@ -39,8 +41,8 @@ export class EventsComponent implements OnInit {
     // eventPhoto: new FormControl('', [Validators.required]),
     tags: new FormControl('', [Validators.required]),
     eventDescription: new FormControl('', [Validators.required]),
-    // startDate: new FormControl('', [Validators.required]),
-    // endDate: new FormControl('', [Validators.required]),
+    startDate: new FormControl('', [Validators.required, startDateValidator]),
+    endDate: new FormControl('', [Validators.required, endDateValidator ]),
     startTime: new FormControl('', [Validators.required]),
     endTime: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
@@ -49,14 +51,22 @@ export class EventsComponent implements OnInit {
     price: new FormControl('', [Validators.required]),
   });
 
-  // Datepicker
-  minDate1 = Date.now();
-  // maxDate1 = new Date(2018, 9, 15);
-  minDate2 = this.addEditEventForm.value.startDate;
-  // maxDate2 = new Date(2018, 9, 15);
 
+  // Angular 2 Input Mask
+  public dateModel = '';
+  public dateMask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+
+
+  // Datepicker
+  minDate = new Date(2017, 5, 10);
+  maxDate = new Date(2018, 9, 15);
   bsValue: Date = new Date();
-  bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
+  // bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
+  
+  // Datepicker
+  // minDate1 = Date.now();
+  // minDate2 = this.addEditEventForm.value.startDate;
+
 
   // Timepicker
   public hstep: number = 1;

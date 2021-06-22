@@ -232,29 +232,45 @@
             <img [src]="imgURL" height="150" width="150" *ngIf="imgURL" />
           </div>
 
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                                 <div class="animated fadeIn">
                                     <label for="startDate">Start Date :</label>
-                                    <input type="text" class="form-control" [minDate]="minDate1"
-                                         #dp="bsDatepicker" bsDatepicker
-                                        [(bsValue)]="bsValue" formControlName="startDate">
+                                    <!-- <input type="text" class="form-control" 
+                                    [minDate]="minDate1"
+                                    #dp="bsDatepicker" bsDatepicker
+                                    formControlName="startDate"> -->
+                                      <input type="text"
+                                      class="form-control"
+                                      [minDate]="minDate"
+                                      [maxDate]="maxDate"
+                                      #dp="bsDatepicker"
+                                      bsDatepicker [(bsValue)]="bsValue"
+                                      formControlName="startDate">
                                     <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.startDate.hasError('required')">
                                             Start date is required.</div>
                                     </div>
                                 </div>
-                            </div>
+              </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                                 <div class="animated fadeIn">
                                     <label for="endDate">End Date :</label>
-                                    <input type="text" class="form-control" [minDate]="minDate2"
-                                         #dp="bsDatepicker" bsDatepicker
-                                        [(bsValue)]="bsValue" formControlName="endDate">
+                                    <!-- <input type="text" class="form-control" 
+                                    [minDate]="minDate2"
+                                    #dp="bsDatepicker" bsDatepicker
+                                    formControlName="endDate"> -->
+                                      <input type="text"
+                                      class="form-control"
+                                      [minDate]="minDate"
+                                      [maxDate]="maxDate"
+                                      #dp="bsDatepicker"
+                                      bsDatepicker [(bsValue)]="bsValue"
+                                      formControlName="endDate">
                                     <div class="invalid-feedback d-block">
                                         <div
                                             *ngIf="submitted && addEditEventForm.controls.endDate.hasError('required')">
@@ -262,9 +278,9 @@
                                             date is required.</div>
                                     </div>
                                 </div>
-                            </div>
+              </div>
             </div>
-          </div> -->
+          </div>
 
           <div class="row">
             <div class="col-md-6">
