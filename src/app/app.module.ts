@@ -9,8 +9,6 @@ import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
 
 
 
@@ -32,8 +30,8 @@ import { ChartsModule } from 'ng2-charts';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MyLoginComponent } from './my-login/my-login.component';
-import { MyRegisterComponent } from './my-register/my-register.component';
+import { MyLoginComponent } from './login/my-login.component';
+import { MyRegisterComponent } from './register/my-register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
@@ -42,6 +40,8 @@ import { DataTableModule } from 'angular2-datatable';
 import { HomeComponent } from './views/home/home.component';
 import { EventDetailsComponent } from './views/event-details/event-details.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 
 @NgModule({
@@ -64,29 +64,20 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ToasterModule,
     DataTableModule,
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
   ],
   declarations: [
     AppComponent,
     DefaultLayoutComponent,
     P404Component,
     P500Component,
-    LoginComponent,
-    RegisterComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
     MyLoginComponent,
     MyRegisterComponent,
     HomeComponent,
     EventDetailsComponent,
-
-
-    // TagAddComponent,
-    // TagEditComponent,
-    // TagListComponent,
-
-    // EventListComponent,
-    // EventEditComponent,
-    // EventAddComponent
   ],
   providers: [{
     provide: LocationStrategy,

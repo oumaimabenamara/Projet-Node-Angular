@@ -16,9 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.listOfEvents();
-    console.log(this.eventsArray);
-
-
+    // console.log(this.eventsArray);
   }
 
 

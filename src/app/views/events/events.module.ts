@@ -24,8 +24,8 @@ import { SelectModule } from 'ng-select';
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     ToasterModule,
     DataTableModule,
     SelectModule
