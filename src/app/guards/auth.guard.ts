@@ -14,14 +14,14 @@ export class AuthGuard implements CanActivate {
     if (token !== null) {
       if (this.isExpiredToken(token)) {
         localStorage.removeItem('token')
-        this.router.navigateByUrl('/login')
+        this.router.navigateByUrl('/home')
         return false;
       } else {
         return true;
       }
     }
     else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/home');
       return false;
     }
 
